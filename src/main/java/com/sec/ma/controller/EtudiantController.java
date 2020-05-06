@@ -6,18 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EtudiantController {
 
-	@GetMapping(value = "/")
-	public String hello() {
-		return "Welcome to Spring Security tutorial :) ";
-	}
 	
-	@GetMapping(value = "/user")
-	public String user() {
-		return "Welcome to Spring Security tutorial :) User";
-	}
-	
-	@GetMapping(value = "/admin")
-	public String admin() {
-		return "Welcome to Spring Security tutorial :) Admin";
-	}
 }
