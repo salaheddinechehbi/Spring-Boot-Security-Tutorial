@@ -8,7 +8,7 @@ public class HomeController {
 
 	@GetMapping(value = "/")
 	public String hello() {
-		return "Welcome to Spring Security tutorial :) ";
+		return "Welcome to Spring Security tutorial :)";
 	}
 	
 	@GetMapping(value = "/user")

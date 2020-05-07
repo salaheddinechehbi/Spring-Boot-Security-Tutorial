@@ -67,6 +67,7 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		//we have to respect the order of heiher role to lower
 	}
 	
+	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
