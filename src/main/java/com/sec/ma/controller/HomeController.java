@@ -32,13 +32,15 @@ public class HomeController {
 	@GetMapping("/home")
 	public ModelAndView index(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("home");
+		modelAndView.setViewName("index");
 		return modelAndView;
     }
 	
-	@GetMapping(value = "/user")
-	public String user() {
-		return "Welcome to Spring Security tutorial :) User";
+	@GetMapping(value = "/userDetails")
+	public ModelAndView user() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("userDetails");
+		return modelAndView;
 	}
 	
 	@GetMapping(value = "/admin")
