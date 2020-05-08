@@ -57,13 +57,13 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		http.authorizeRequests()
-		.antMatchers("/admin").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
+		.antMatchers("/admin","/register").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
 		.antMatchers("/user").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
 		.antMatchers("/","static/css","static/js").permitAll()//we this we tell spring to return this pages however is user login or not, or we use only /
 		.and()
 		.formLogin();
 		
-		
+		//.formLogin().loginPage("/login");
 		//we have to respect the order of heiher role to lower
 	}
 	
