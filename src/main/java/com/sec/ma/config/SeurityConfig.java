@@ -44,6 +44,9 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
+		//we have to respect the order of heiher role to lower
+		
+		
 		/*http.authorizeRequests()
 			.antMatchers("/**").hasRole("ADMIN")//here we give the access only to user with role ADMIN and he have access to all url path with /**
 			.and()
@@ -65,20 +68,25 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated()//that main that every request thee user must be authentificated
 		.and()
 		.csrf().disable()//we desable srf security
-		.formLogin().loginPage("/login").permitAll()//we tell spring security that we have a custom login page
+		.formLogin()
+		.loginProcessingUrl("/signin")//this is in case we want a custom the action url in form, by default is /login
+		.loginPage("/login").permitAll()//we tell spring security that we have a custom login page
+		.usernameParameter("myUsername")//this is in case we want a custom username and password name for input text in login form and not the default ones (username / password)
+		.passwordParameter("myPassword")
 		.defaultSuccessUrl("/home")// URL that we will give by default after login
 		.and()
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/login")//the request we call after we successufly logout
 		.and()
-		.rememberMe().tokenValiditySeconds(2592000).key("sir-khalina-hanyin")//impliment remember-me checkbox 
+		.rememberMe().tokenValiditySeconds(2592000).key("sir-khalina-hanyin").rememberMeParameter("myRemember-me")//impliment remember-me checkbox 
 		.and()
 		.exceptionHandling()
 		.accessDeniedPage("/access-denied");//when a user try to have access to some services that he don't have authority for it
 		
-		//.formLogin().loginPage("/login");
-		//we have to respect the order of heiher role to lower
+		
+		
+		
 	}
 	
 	@Bean

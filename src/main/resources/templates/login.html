@@ -28,7 +28,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form name="f" th:action="@{/login}" method="POST">
+      <form name="f" th:action="@{/signin}" method="POST">
       
       <div th:if="${param.error}" class="alert alert-danger" >
         	Invalide UserName Or Password
@@ -38,7 +38,7 @@
         </div>
         
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="username" placeholder="Username">
+          <input type="text" class="form-control" name="myUsername" placeholder="Username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <input type="password" class="form-control" name="myPassword" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -56,7 +56,7 @@
         <div class="row">
           <div class="col-8">
             <div>
-              <input type="checkbox"  id="remember-me" name="remember-me">
+              <input type="checkbox"  id="myRemember-me" name="myRemember-me">
               <label for="remember">Remember Me</label>
             </div>
           </div>
