@@ -58,7 +58,7 @@ public class HomeController {
 	@GetMapping("/access-denied")
 	public ModelAndView accessDenied() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("500");
+		modelAndView.setViewName("forbidden");
 		return modelAndView;
 	}
 	
