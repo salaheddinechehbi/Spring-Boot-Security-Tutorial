@@ -62,19 +62,20 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/admin","/register","/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
 		.antMatchers("/user","/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
-		.antMatchers("static/css","static/plugins","static/js").permitAll()//we this we tell spring to return this pages however is user login or not, or we use only /
-		.anyRequest().authenticated()
+		.anyRequest().authenticated()//that main that every request thee user must be authentificated
 		.and()
-		.csrf().disable()
-		.formLogin()
+		.csrf().disable()//we desable srf security
+		.formLogin().loginPage("/login").permitAll()//we tell spring security that we have a custom login page
 		.defaultSuccessUrl("/home")// URL that we will give by default after login
 		.and()
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login")
+		.logoutSuccessUrl("/login")//the request we call after we successufly logout
+		.and()
+		.rememberMe().tokenValiditySeconds(2592000).key("sir-khalina-hanyin")//impliment remember-me checkbox 
 		.and()
 		.exceptionHandling()
-		.accessDeniedPage("/access-denied");
+		.accessDeniedPage("/access-denied");//when a user try to have access to some services that he don't have authority for it
 		
 		//.formLogin().loginPage("/login");
 		//we have to respect the order of heiher role to lower
@@ -86,10 +87,11 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
-	//@Override
-	//public void configure(WebSecurity web) throws Exception {
-		//web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-	//}
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/static/**", "/css/**", "/js/**", "/plugins/**", "/img/**");
+		//web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
+	}
 	
 	
 	
