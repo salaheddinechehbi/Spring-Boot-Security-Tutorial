@@ -26,12 +26,6 @@ public class HomeController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/")
-	public ModelAndView home(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("index");
-		return modelAndView;
-    }
 	
 	@GetMapping("/home")
 	public ModelAndView index(){
@@ -47,9 +41,32 @@ public class HomeController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/admin")
-	public String admin() {
-		return "Welcome to Spring Security tutorial :) Admin";
+	@GetMapping("/entrDetails")
+	public ModelAndView entreprise() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("entrDetails");
+		return modelAndView;
+	}
+	
+	@GetMapping("/clientDetails")
+	public ModelAndView client() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("clientDetails");
+		return modelAndView;
+	}
+	
+	@GetMapping("/access-denied")
+	public ModelAndView accessDenied() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("500");
+		return modelAndView;
+	}
+	
+	@GetMapping("/error")
+	public ModelAndView error() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("error");
+		return modelAndView;
 	}
 	
 }

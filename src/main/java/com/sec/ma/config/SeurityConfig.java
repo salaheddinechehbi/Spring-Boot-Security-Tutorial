@@ -5,12 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -59,10 +61,20 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers("/admin","/register","/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
-		.antMatchers("/user","/home").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
-		.antMatchers("/","static/css","static/plugins","static/js").permitAll()//we this we tell spring to return this pages however is user login or not, or we use only /
+		.antMatchers("/user","/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
+		.antMatchers("static/css","static/plugins","static/js").permitAll()//we this we tell spring to return this pages however is user login or not, or we use only /
+		.anyRequest().authenticated()
 		.and()
-		.formLogin();
+		.csrf().disable()
+		.formLogin()
+		.defaultSuccessUrl("/home")// URL that we will give by default after login
+		.and()
+		.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/")
+		.and()
+		.exceptionHandling()
+		.accessDeniedPage("/access-denied");
 		
 		//.formLogin().loginPage("/login");
 		//we have to respect the order of heiher role to lower
@@ -73,6 +85,11 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		//return NoOpPasswordEncoder.getInstance();
 		return new BCryptPasswordEncoder();
 	}
+	
+	//@Override
+	//public void configure(WebSecurity web) throws Exception {
+		//web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+	//}
 	
 	
 	
