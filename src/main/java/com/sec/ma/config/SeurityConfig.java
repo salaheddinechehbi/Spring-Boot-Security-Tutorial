@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 @EnableWebSecurity
@@ -64,7 +66,7 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers("/admin","/register","/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
-		.antMatchers("/user","/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
+		.antMatchers("/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
 		.anyRequest().authenticated()//that main that every request thee user must be authentificated
 		.and()
 		.csrf().disable()//we desable srf security
@@ -102,7 +104,13 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-	
+	//@Bean
+	//public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver, SpringSecurityDialect sec) {
+	  //  final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+	   // templateEngine.setTemplateResolver(templateResolver);
+	   // templateEngine.addDialect(sec); // Enable use of "sec"
+	   // return templateEngine;
+	//}
 	
 
 	
