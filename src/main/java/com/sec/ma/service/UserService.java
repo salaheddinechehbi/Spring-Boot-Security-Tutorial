@@ -1,5 +1,7 @@
 package com.sec.ma.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,10 @@ public class UserService {
 		user.setPassword(pass);
 		userReporitory.save(user);
 		
+	}
+	
+	public List<User> findAll() {
+		return userReporitory.findAll();
 	}
 	
 }
