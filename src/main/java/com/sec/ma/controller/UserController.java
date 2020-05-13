@@ -43,7 +43,7 @@ public class UserController {
 	@GetMapping("/userDetails")
 	public ModelAndView findAllUser() {
 		ModelAndView modelAndView = new ModelAndView();
-		//modelAndView.addObject("listUsers",userService.findAll());
+		modelAndView.addObject("successMessage", "Please correct");
 		modelAndView.setViewName("userDetails");
 		return modelAndView;
 	}
