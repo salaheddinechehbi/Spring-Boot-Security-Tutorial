@@ -48,6 +48,9 @@
 
     <!-- Main content -->
     <section class="content">
+    
+				<span th:utext="${successMessage}"></span>
+				
       <div class="row">
           <!-- left column -->
           <div class="col-md-12">
@@ -58,28 +61,28 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" id="quickForm" th:action="@{/registerU}">
+              <form autocomplete="off" action="#" th:action="@{/userDetails}" th:object="${user}" method="post" class="form-signin" role="form">
                 <div class="card-body">
                 	<div class="row">
                 	
               			<div class="col-sm-4">
                  			<div class="form-group">
                    				<label for="exampleInputNom1">Nom</label>
-                    			<input type="text" name="nom" class="form-control" id="exampleInputNom1" placeholder="Enter Nom">
+                    			<input type="text" th:field="*{nom}" name="nom" class="form-control" id="exampleInputNom1" placeholder="Enter Nom">
                   			</div>
                   		</div>
                   		
               			<div class="col-sm-4">
 		                  <div class="form-group">
 		                    <label for="exampleInputEmail1">Email Address</label>
-		                    <input type="Email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+		                    <input type="Email" th:field="*{email}" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
 		                  </div>
                   		</div>
 
 						<div class="col-sm-4">
                  			<div class="form-group">
                    				<label for="exampleInputLogin1">Login</label>
-                    			<input type="text" name="username" class="form-control" id="exampleInputLogin1" placeholder="Enter Login">
+                    			<input type="text" th:field="*{username}" name="username" class="form-control" id="exampleInputLogin1" placeholder="Enter Login">
                   			</div>
                   		</div>
                   		
@@ -89,19 +92,41 @@
                   		<div class="col-sm-4">
 		                  <div class="form-group">
 		                    <label for="exampleInputTele1">Tele</label>
-		                    <input type="tel" name="tele" class="form-control" id="exampleInputTele1" placeholder="Telephone">
+		                    <input type="tel" th:field="*{tele}" name="tele" class="form-control" id="exampleInputTele1" placeholder="Telephone">
 		                  </div>
                   		</div>
 
 						<div class="col-sm-4">
                  			<div class="form-group">
                    				<label for="exampleInputRole1">Role</label>
-                    			<select name="role" id="exampleInputRole1" class="form-control select2" style="width: 100%;">
-				                    <option selected="selected">Choisir Le Role !!</option>
+                    			<select th:field="*{roles}" name="role" id="exampleInputRole1" class="form-control select2" style="width: 100%;">
+				                    <option value="#" selected="selected">Choisir Le Role !!</option>
 				                    <option value="ROLE_ADMIN">ADMIN</option>
 				                    <option value="ROLE_USER">USER</option>
 				                </select>
                   			</div>
+                  		</div>
+                  		
+                  		<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="exampleInputActive1">Etat Compte</label>
+                    			<select th:field="*{active}" name="active" id="exampleInputActive1"  class="form-control select2" style="width: 100%;">
+				                    <option value="0" selected="selected">Choisir L'Etat !!</option>
+				                    <option value="1">ACTIVE</option>
+				                    <option value="0">NON-ACTIVE</option>
+				                </select>
+                  			</div>
+                  		</div>
+                  		
+                  	</div>
+                  	
+                  	<div class="row">
+                	
+                  		<div class="col-sm-4">
+		                  <div class="form-group">
+		                    <label for="exampleInputPassword1">Password</label>
+		                    <input type="password" th:field="*{password}" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		                  </div>
                   		</div>
                   		
                   	</div>
@@ -219,11 +244,6 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
   $('#quickForm').validate({
     rules: {
       email: {
