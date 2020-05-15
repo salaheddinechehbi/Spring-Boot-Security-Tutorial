@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,8 +34,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
-            <h6 th:inline="text">[[${successMessage}]]</h6>
+            <h3>Users</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -50,41 +49,114 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Gestion Users</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" id="quickForm" th:action="@{/registerU}">
+                <div class="card-body">
+                	<div class="row">
+                	
+              			<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="exampleInputNom1">Nom</label>
+                    			<input type="text" name="nom" class="form-control" id="exampleInputNom1" placeholder="Enter Nom">
+                  			</div>
+                  		</div>
+                  		
+              			<div class="col-sm-4">
+		                  <div class="form-group">
+		                    <label for="exampleInputEmail1">Email Address</label>
+		                    <input type="Email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+		                  </div>
+                  		</div>
+
+						<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="exampleInputLogin1">Login</label>
+                    			<input type="text" name="username" class="form-control" id="exampleInputLogin1" placeholder="Enter Login">
+                  			</div>
+                  		</div>
+                  		
+                  	</div>
+                  	<div class="row">
+                	
+                  		<div class="col-sm-4">
+		                  <div class="form-group">
+		                    <label for="exampleInputTele1">Tele</label>
+		                    <input type="tel" name="tele" class="form-control" id="exampleInputTele1" placeholder="Telephone">
+		                  </div>
+                  		</div>
+
+						<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="exampleInputRole1">Role</label>
+                    			<select name="role" id="exampleInputRole1" class="form-control select2" style="width: 100%;">
+				                    <option selected="selected">Choisir Le Role !!</option>
+				                    <option value="ROLE_ADMIN">ADMIN</option>
+				                    <option value="ROLE_USER">USER</option>
+				                </select>
+                  			</div>
+                  		</div>
+                  		
+                  	</div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <h3 class="card-title">Users DataTable</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Login</th>
+                  <th>Tele</th>
+                  <th>Role</th>
                 </tr>
                 </thead>
                 <tbody>
                 
-                <tr>
-                  <td>dgdfg</td>
-                  <td>Internet Explorer 4.0</td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
+                <tr th:each="us : ${listUsers}">
+                  <td th:text="${us.nom}"></td>
+                  <td th:text="${us.email}"></td>
+                  <td th:text="${us.username}"></td>
+                  <td th:text="${us.tele}"></td>
+                  <td th:text="${us.roles}"></td>
                 </tr>
                
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Login</th>
+                  <th>Tele</th>
+                  <th>Role</th>
                 </tr>
                 </tfoot>
               </table>
@@ -120,6 +192,9 @@
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- jquery-validation -->
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -141,6 +216,66 @@
       "responsive": true,
     });
   });
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+  $.validator.setDefaults({
+    submitHandler: function () {
+      alert( "Form successful submitted!" );
+    }
+  });
+  $('#quickForm').validate({
+    rules: {
+      email: {
+        required: true,
+        email: true,
+      },
+      nom: {
+          required: true,
+        },
+      role: {
+          required: true,
+        },
+      username: {
+          required: true,
+          minlength: 5
+        },
+        tele: {
+            required: true,
+          }
+    },
+    messages: {
+      email: {
+        required: "Please enter a email address",
+        email: "Please enter a vaild email address"
+      },
+      nom: {
+        required: "Please provide a name",
+      },
+      role: {
+          required: "Please provide a role",
+        },
+      username: {
+          required: "Please provide a login",
+          minlength: "Your login must be at least 5 characters long"
+        },
+        tele: {
+            required: "Please provide a tele",
+          }
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
 </script>
 </body>
 </html>

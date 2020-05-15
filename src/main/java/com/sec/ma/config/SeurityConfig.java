@@ -65,26 +65,27 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		http.authorizeRequests()
-		.antMatchers("/admin","/register","/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
-		.antMatchers("/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
-		.anyRequest().authenticated()//that main that every request thee user must be authentificated
+			.antMatchers("/admin","/userDetails","/register").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
+			.antMatchers("/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
+			.anyRequest().authenticated()//that main that every request thee user must be authentificated
 		.and()
-		.csrf().disable()//we desable srf security
-		.formLogin()
-		.loginProcessingUrl("/signin")//this is in case we want a custom the action url in form, by default is /login
-		.loginPage("/login").permitAll()//we tell spring security that we have a custom login page
-		.usernameParameter("myUsername")//this is in case we want a custom username and password name for input text in login form and not the default ones (username / password)
-		.passwordParameter("myPassword")
-		.defaultSuccessUrl("/home")// URL that we will give by default after login
+			.csrf().disable()//we desable srf security
+			.formLogin()
+			.loginProcessingUrl("/signin")//this is in case we want a custom the action url in form, by default is /login
+			.loginPage("/login").permitAll()//we tell spring security that we have a custom login page
+			.failureUrl("/login")
+			.usernameParameter("myUsername")//this is in case we want a custom username and password name for input text in login form and not the default ones (username / password)
+			.passwordParameter("myPassword")
+			.defaultSuccessUrl("/home")// URL that we will give by default after login
 		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login")//the request we call after we successufly logout
+			.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/login")//the request we call after we successufly logout
 		.and()
-		.rememberMe().tokenValiditySeconds(2592000).key("sir-khalina-hanyin").rememberMeParameter("myRemember-me")//impliment remember-me checkbox 
+			.rememberMe().tokenValiditySeconds(2592000).key("sir-khalina-hanyin").rememberMeParameter("myRemember-me")//impliment remember-me checkbox 
 		.and()
-		.exceptionHandling()
-		.accessDeniedPage("/access-denied");//when a user try to have access to some services that he don't have authority for it
+			.exceptionHandling()
+			.accessDeniedPage("/access-denied");//when a user try to have access to some services that he don't have authority for it
 		
 		
 		

@@ -34,14 +34,6 @@ public class HomeController {
 		return modelAndView;
     }
 	
-	
-	@GetMapping("/entrDetails")
-	public ModelAndView entreprise() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("entrDetails");
-		return modelAndView;
-	}
-	
 	@GetMapping("/clientDetails")
 	public ModelAndView client() {
 		ModelAndView modelAndView = new ModelAndView();

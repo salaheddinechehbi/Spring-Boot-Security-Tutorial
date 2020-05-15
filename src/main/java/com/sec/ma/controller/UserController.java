@@ -1,16 +1,14 @@
 package com.sec.ma.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,9 +41,22 @@ public class UserController {
 	@GetMapping("/userDetails")
 	public ModelAndView findAllUser() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("successMessage", "Please correct");
+		//PrintStream out = System.out;System.setOut(out);
+		//System.out.println("*********************************************************************************");
+		//System.out.println(userService.findAll());
+		//System.out.println("*********************************************************************************");
+		modelAndView.addObject("successMes", "Please correct");
+		modelAndView.addObject("listUsers", userService.findAll());
+		//modelMap.addAttribute("list", userService.findAll());
 		modelAndView.setViewName("userDetails");
 		return modelAndView;
 	}
+	
+	@GetMapping("/userD")
+	public String findUser(Model model) {
+		model.addAttribute("successMes", "Please correct");
+		return "userDetails";
+	}
+	
 	
 }
