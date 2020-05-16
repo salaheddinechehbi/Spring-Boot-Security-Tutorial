@@ -111,8 +111,7 @@
                  			<div class="form-group">
                    				<label for="exampleInputActive1">Etat Compte</label>
                     			<select th:field="*{active}" name="active" id="exampleInputActive1"  class="form-control select2" style="width: 100%;">
-				                    <option value="0" selected="selected">Choisir L'Etat !!</option>
-				                    <option value="1">ACTIVE</option>
+				                    <option value="1" selected="selected">ACTIVE</option>
 				                    <option value="0">NON-ACTIVE</option>
 				                </select>
                   			</div>
@@ -162,6 +161,8 @@
                   <th>Login</th>
                   <th>Tele</th>
                   <th>Role</th>
+                  <th>Compte</th>
+                  <th>Modification</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -172,18 +173,16 @@
                   <td th:text="${us.username}"></td>
                   <td th:text="${us.tele}"></td>
                   <td th:text="${us.roles}"></td>
+                  <td th:text="${us.active} ? 'Active' : 'Non-Ative' ">
+                  </td>
+                  <td>
+                  	<a href="" type="button" class="btn btn-info" >Modifier</a>
+                  	<a href="" type="button" class="btn btn-danger" >Supprimer</a>
+                  </td>
                 </tr>
                
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>Nom</th>
-                  <th>Email</th>
-                  <th>Login</th>
-                  <th>Tele</th>
-                  <th>Role</th>
-                </tr>
-                </tfoot>
+                
               </table>
             </div>
             <!-- /.card-body -->
