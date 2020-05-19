@@ -21,7 +21,11 @@ public class EntrepriseService {
 		entrepriseRepository.save(entreprise);		
 	}
 	
-	
+	public void delete(int id) {
+		
+		entrepriseRepository.deleteById(id);		
+	}
+
 	public List<Entreprise> findAll() {
 		
 		return entrepriseRepository.findAll();

@@ -9,8 +9,14 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 @Entity
 @Table(name = "user_data")
+@Data @NoArgsConstructor @AllArgsConstructor @ToString 
 public class User {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,64 +37,6 @@ public class User {
 	private boolean active;
 	@NotNull(message="Role is empthy")
 	private String roles;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getTele() {
-		return tele;
-	}
-	public void setTele(String tele) {
-		this.tele = tele;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	
-	public String getRoles() {
-		return roles;
-	}
-	public void setRoles(String roles) {
-		this.roles = roles;
-	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", nom=" + nom + ", username=" + username + ", roles=" + roles + "]";
-	}
-	
 	
 	
 }

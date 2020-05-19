@@ -61,7 +61,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form autocomplete="off" action="#" th:action="@{/userDetails}" th:object="${user}" method="post" class="form-signin" role="form">
+              <form autocomplete="off" id="quickForm" action="#" th:action="@{/userDetails}" th:object="${user}" method="post" class="form-signin" role="form">
                 <div class="card-body">
                 	<div class="row">
                 	
@@ -132,7 +132,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-success">Submit</button>
                 </div>
               </form>
             </div>
@@ -176,8 +176,8 @@
                   <td th:text="${us.active} ? 'Active' : 'Non-Ative' ">
                   </td>
                   <td>
-                  	<a href="" type="button" class="btn btn-info" >Modifier</a>
-                  	<a href="" type="button" class="btn btn-danger" >Supprimer</a>
+                  	<a href="" type="button" class="btn btn btn-block btn-outline-info" >Modifier</a>
+                  	<a href="" type="button" class="btn btn btn-block btn-outline-danger" >Supprimer</a>
                   </td>
                 </tr>
                

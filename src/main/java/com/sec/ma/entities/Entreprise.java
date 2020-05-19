@@ -8,8 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 @Entity
 @Table(name = "agence_data")
+@Data @NoArgsConstructor @AllArgsConstructor @ToString 
 public class Entreprise {
 
 	@Id @GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -29,52 +35,6 @@ public class Entreprise {
 	@NotNull(message="Ville is empthy")
 	@Column(name="ville_agence")
 	private String ville;
-	public Entreprise() {
-		super();
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getLibelle() {
-		return libelle;
-	}
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
-	}
-	public String getAdresse() {
-		return adresse;
-	}
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-	public String getVille() {
-		return ville;
-	}
-	public void setVille(String ville) {
-		this.ville = ville;
-	}
-	
-	public String getTele() {
-		return tele;
-	}
-	public void setTele(String tele) {
-		this.tele = tele;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	@Override
-	public String toString() {
-		return "Entreprise [id=" + id + ", libelle=" + libelle + "]";
-	}
-	
-	
 	
 	
 	

@@ -65,8 +65,8 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		http.authorizeRequests()
-			.antMatchers("/admin","/userDetails","/register").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
-			.antMatchers("/home","/entrDetails","/clientDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
+			.antMatchers("/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
+			.antMatchers("/home","/entrDetails","/clientDetails","/entrDetails/delete/**").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
 			.anyRequest().authenticated()//that main that every request thee user must be authentificated
 		.and()
 			.csrf().disable()//we desable srf security
@@ -100,6 +100,7 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		//web.ignoring().antMatchers("/static/**");
 		web.ignoring().antMatchers("/static/**", "/css/**", "/js/**", "/plugins/**", "/img/**");
 		//web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
 	}

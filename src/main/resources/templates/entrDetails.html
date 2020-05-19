@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"><!-- Toastr -->
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
@@ -56,13 +57,86 @@
           <!-- left column -->
           <div class="col-md-12">
             <!-- jquery validation -->
-            <div class="card card-primary">
+            <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Gestion Entreprise</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form autocomplete="off" action="#" th:action="@{/entrDetails}" th:object="${entreprise}" method="post" class="form-signin" role="form">
+                <div class="card-body">
+                	<button class="btn btn-success"  data-toggle="modal" data-target="#modal-xl">Ajouter</button>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Entreprise DataTable</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Libelle</th>
+                  <th>Email</th>
+                  <th>Tele</th>
+                  <th>Adresse</th>
+                  <th>Ville</th>
+                  <th>Modification</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr th:each="entr : ${listEntr}">
+                  <td th:text="${entr.libelle}"></td>
+                  <td th:text="${entr.email}"></td>
+                  <td th:text="${entr.tele}"></td>
+                  <td th:text="${entr.adresse}"></td>
+                  <td th:text="${entr.ville}"></td>
+                  <td>
+                  	<a href="" type="button" class="btn btn btn-block btn-outline-info">Modifier</a>
+                  	<a href="" type="button" th:href="@{/entrDetails/delete/{id}(id=${entr.id})}" class="btn btn btn-block btn-outline-danger" >Supprimer</a>
+                  </td>
+                </tr>
+               
+                </tbody>
+                
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+	      <h4 class="modal-title">Default Modal</h4>
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	    <div class="modal-body">
+	      <form autocomplete="off" id="quickForm" action="#" th:action="@{/entrDetails}" th:object="${entreprise}" method="post" class="form-signin" role="form">
                 <div class="card-body">
                 	<div class="row">
                 	
@@ -108,67 +182,19 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
               </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
-        </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Entreprise DataTable</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Libelle</th>
-                  <th>Email</th>
-                  <th>Tele</th>
-                  <th>Adresse</th>
-                  <th>Ville</th>
-                  <th>Modification</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                <tr th:each="entr : ${listEntr}">
-                  <td th:text="${entr.libelle}"></td>
-                  <td th:text="${entr.email}"></td>
-                  <td th:text="${entr.tele}"></td>
-                  <td th:text="${entr.adresse}"></td>
-                  <td th:text="${entr.ville}"></td>
-                  <td>
-                  	<a href="" type="button" class="btn btn-info" >Modifier</a>
-                  	<a href="" type="button" class="btn btn-danger" >Supprimer</a>
-                  </td>
-                </tr>
-               
-                </tbody>
-                
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+	    </div>
+	    <div class="modal-footer justify-content-between">
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    </div>
+	  </div>
+	  <!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
   
   <footer th:insert="footer.html" class="main-footer"></footer>
 
@@ -192,6 +218,8 @@
 <!-- jquery-validation -->
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- Toastr -->
+<script src="plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -266,6 +294,10 @@ $(document).ready(function () {
     }
   });
 });
+</script>
+<script type="text/javascript">
+
+
 </script>
 </body>
 </html>
