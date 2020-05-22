@@ -3,6 +3,7 @@ package com.sec.ma.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,7 @@ import com.sec.ma.entities.Entreprise;
 import com.sec.ma.service.EntrepriseService;
 
 @RestController
-@RequestMapping(value = "/entrDetails")
+@RequestMapping("/entrDetails")
 public class EntrepriseController {
 
 	@Autowired
@@ -50,15 +51,11 @@ public class EntrepriseController {
 		return modelAndView;
 	}
 	
-	@GetMapping(value = "/delete/{id}")
-	public ModelAndView addEntreprise(@PathVariable(value = "id") int  id) {
-		ModelAndView modelAndView = new ModelAndView();
+	@GetMapping("/delete/{id}")
+	public ModelAndView deleteEntreprise(@PathVariable(value = "id") int  id) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/entrDetails");
 		// Check for the validations
-		//entrepriseService.delete(id);
-		modelAndView.addObject("successMessage", "Entreprise is deleted successfully!");
-		modelAndView.addObject("entreprise", new Entreprise());
-		modelAndView.addObject("listEntr", entrepriseService.findAll());
-		modelAndView.setViewName("entrDetails");
+		entrepriseService.delete(id);
 		return modelAndView;
 	}
 	
