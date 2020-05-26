@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,12 +37,11 @@ public class EntrepriseController {
 	}
 	
 	@PostMapping
-	public ModelAndView addEntreprise(@Valid Entreprise entreprise, BindingResult bindingResult, ModelMap modelMap) {
+	public ModelAndView addEntreprise(@Valid Entreprise entreprise, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		// Check for the validations
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-			modelMap.addAttribute("bindingResult", bindingResult);
 		}else {
 			entrepriseService.save(entreprise);
 			modelAndView.addObject("successMessage", "Entreprise is registered successfully!");
@@ -54,20 +54,24 @@ public class EntrepriseController {
 	}
 	
 	@PostMapping("/update")
-	public ModelAndView updateEntreprise(@Valid Entreprise entreprise, BindingResult bindingResult, ModelMap modelMap) {
-		ModelAndView modelAndView = new ModelAndView();
-		// Check for the validations
-		if(bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-			modelMap.addAttribute("bindingResult", bindingResult);
-		}else {
+	public ModelAndView updateEntreprise(HttpServletRequest request, Model model) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/entrDetails");
+		Entreprise entreprise = new Entreprise();
+		try{
+			
+			entreprise.setLibelle(request.getParameter("libelle"));
+			entreprise.setEmail(request.getParameter("email"));
+			entreprise.setTele(request.getParameter("tele"));
+			entreprise.setAdresse(request.getParameter("adresse"));
+			entreprise.setVille(request.getParameter("ville"));
+		    entreprise.setId(Integer.parseInt(request.getParameter("idE")));
+		    
 			entrepriseService.save(entreprise);
-			modelAndView.addObject("successMessage", "Entreprise is registered successfully!");
+			model.addAttribute("successMessage", "update");
+			
+		} catch(NumberFormatException ex){ // handle your exception
+		    System.out.println("Format id " + entreprise.getLibelle() + "  :  " + entreprise.getId());
 		}
-		modelAndView.addObject("entreprise", new Entreprise());
-		modelAndView.addObject("listEntr", entrepriseService.findAll());
-		modelAndView.setViewName("entrDetails");
-		
 		return modelAndView;
 	}
 	

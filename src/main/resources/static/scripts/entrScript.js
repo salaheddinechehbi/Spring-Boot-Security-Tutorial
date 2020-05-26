@@ -74,14 +74,21 @@ $(document).ready(function () {
 	  $(document).on('click','#editEntr',function(){
 		    let id = $(this).parent().find('#idEntr').val();
 		    let tr = $(this).closest('tr');
-		    $("#exampleInputLibelle1").val($(tr).find('td').eq(0).text());
-		    $("#exampleInputEmail1").val($(tr).find('td').eq(1).text());
-		    $("#exampleInputTele1").val($(tr).find('td').eq(2).text());
-		    $("#exampleInputAdresse1").val($(tr).find('td').eq(3).text());
-		    $("#exampleInputVille1").val($(tr).find('td').eq(4).text());
-		    $("#addEntr").attr("disabled",true);
-		    $("#updateEntr").attr("disabled",false);
+		    $("#updateLibelle2").val($(tr).find('td').eq(0).text());
+		    $("#updateEmail2").val($(tr).find('td').eq(1).text());
+		    $("#updateTele2").val($(tr).find('td').eq(2).text());
+		    $("#updateAdresse2").val($(tr).find('td').eq(3).text());
+		    $("#updateVille2").val($(tr).find('td').eq(4).text());
+		    $('#example2 #idEntr').val(id);
+		    $('#update-modal #idE').val(id);
+		  	console.log("ttttttttttttttt "+$('#update-modal #idE').val());
 		 });
+	  
+	  //$(document).on('click','#updateEntr',function(){
+		  	
+		//  	$('#update-modal #idE').val($('#idEntr').val());
+		  //	console.log("kjlllllll " + $('#update-modal #idE').val());
+		 //});
 	  
 	  $(document).on('click','#deleteEntr',function(){
 		  	let id = $(this).parent().find('#idEntr').val();
@@ -94,9 +101,6 @@ $(document).ready(function () {
 		    $("#exampleInputTele1").val("");
 		    $("#exampleInputAdresse1").val("");
 		    $("#exampleInputVille1").val("");
-		    $("#addEntr").val('Ajouter');
-		    $("#addEntr").attr("disabled",false);
-		    $("#updateEntr").attr("disabled",true);
 		 });
 	  
 	  

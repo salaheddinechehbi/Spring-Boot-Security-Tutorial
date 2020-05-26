@@ -1,256 +1,359 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sport-Travel | Entreprises</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"><!-- Toastr -->
-  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Sport-Travel | Entreprises</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet"
+	href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/adminlte.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  
-  <!-- Navbar -->
-  <nav th:insert="nav.html" class="main-header navbar navbar-expand navbar-white navbar-light"></nav>
-  <!-- /.navbar -->
-  <!-- Main Sidebar Container -->
-  <aside th:insert="sideBar.html :: sideBar" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
-  
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Entreprises</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Entreprises</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+	<div class="wrapper">
 
-    <!-- Main content -->
-     <section class="content">
-    
-				<span th:utext="${successMessage}"></span>
-				
-      <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Gestion Entreprise</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-                <div class="card-body">
-                	<button class="btn btn-success"  data-toggle="modal" data-target="#add-modal">Ajouter</button>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
+		<!-- Navbar -->
+		<nav th:insert="nav.html"
+			class="main-header navbar navbar-expand navbar-white navbar-light"></nav>
+		<!-- /.navbar -->
+		<!-- Main Sidebar Container -->
+		<aside th:insert="sideBar.html :: sideBar"
+			class="main-sidebar sidebar-dark-primary elevation-4"></aside>
 
-          </div>
-          <!--/.col (right) -->
-        </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Entreprise DataTable</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Libelle</th>
-                  <th>Email</th>
-                  <th>Tele</th>
-                  <th>Adresse</th>
-                  <th>Ville</th>
-                  <th>Modification</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                <tr th:each="entr : ${listEntr}">
-                  <td th:text="${entr.libelle}"></td>
-                  <td th:text="${entr.email}"></td>
-                  <td th:text="${entr.tele}"></td>
-                  <td th:text="${entr.adresse}"></td>
-                  <td th:text="${entr.ville}"></td>
-                  <td>
-                  	<a href="#" type="button" data-toggle="modal" data-target="#add-modal" class="btn btn btn-block btn-outline-info" id="editEntr">Modifier</a>
-                  	<a href="#" type="button" data-toggle="modal" data-target="#delete-modal" class="btn btn btn-block btn-outline-danger" id="deleteEntr">Supprimer</a>
-                  	<input type="hidden" id="idEntr" th:value="${entr.id}">
-                  </td>
-                </tr>
-               
-                </tbody>
-                
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
-  <div class="modal fade" id="add-modal">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-	      <h4 class="modal-title">Default Modal</h4>
-	      <button type="button" class="close" data-dismiss="modal" id="closeMod" aria-label="Close">
-	        <span aria-hidden="true">&times;</span>
-	      </button>
-	    </div>
-	    <div class="modal-body">
-	      <form autocomplete="off" id="quickForm" action="#" th:action="@{/entrDetails}" th:object="${entreprise}" method="post" class="form-signin" role="form">
-                <div class="card-body">
-                	<div class="row">
-                	
-              			<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="exampleInputlibelle1">Nom</label>
-                    			<input type="text" th:field="*{libelle}" name="libelle" class="form-control" id="exampleInputLibelle1" placeholder="Enter Libelle">
-                  			</div>
-                  		</div>
-                  		
-              			<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="exampleInputEmail1">Email</label>
-		                    <input type="Email" th:field="*{email}" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-		                  </div>
-                  		</div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1>Entreprises</h1>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active">Entreprises</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
 
-						<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="exampleInputTele1">Tele</label>
-		                    <input type="tel" th:field="*{tele}" name="tele" class="form-control" id="exampleInputTele1" placeholder="Enter Telephone">
-		                  </div>
-                  		</div>
-                  		
-                  	</div>
-                  	<div class="row">
-                	
-                  		<div class="col-sm-8">
-		                  <div class="form-group">
-		                    <label for="exampleInputAdresse1">Adresse</label>
-		                    <input type="text" th:field="*{adresse}" name="adresse" class="form-control" id="exampleInputAdresse1" placeholder="Enter Adresse">
-		                  </div>
-                  		</div>
+			<!-- Main content -->
+			<section class="content">
 
-						<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="exampleInputVille1">Ville</label>
-		                    <input type="text" th:field="*{ville}" name="ville" class="form-control" id="exampleInputVille1" placeholder="Enter Ville">
-		                  </div>
-                  		</div>
-                  		
-                  	</div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
-                  <button id="updateEntr" class="btn btn-info" disabled="disabled">Modifier</button>
-                </div>
-              </form>
-	    </div>
-	    <div class="modal-footer justify-content-between">
-	      <button id="closeMod" class="btn btn-default" data-dismiss="modal">Close</button>
-	    </div>
-	  </div>
-	  <!-- /.modal-content -->
+				<div class="row">
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- jquery validation -->
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Gestion Entreprise</h3>
+							</div>
+							<!-- /.card-header -->
+							<!-- form start -->
+							<div class="card-body">
+								<button class="btn btn-success" data-toggle="modal"
+									data-target="#add-modal">Ajouter</button>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!--/.col (left) -->
+					<!-- right column -->
+					<div class="col-md-6"></div>
+					<!--/.col (right) -->
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Entreprise DataTable</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example2" class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Libelle</th>
+											<th>Email</th>
+											<th>Tele</th>
+											<th>Adresse</th>
+											<th>Ville</th>
+											<th>Modification</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr th:each="entr : ${listEntr}">
+											<td th:text="${entr.libelle}"></td>
+											<td th:text="${entr.email}"></td>
+											<td th:text="${entr.tele}"></td>
+											<td th:text="${entr.adresse}"></td>
+											<td th:text="${entr.ville}"></td>
+											<td><a href="#" type="button" data-toggle="modal"
+												data-target="#update-modal"
+												class="btn btn btn-block btn-outline-info" id="editEntr">Modifier</a>
+												<a href="#" type="button" data-toggle="modal"
+												data-target="#delete-modal"
+												class="btn btn btn-block btn-outline-danger" id="deleteEntr">Supprimer</a>
+												<input type="hidden" id="idEntr" th:value="${entr.id}">
+											</td>
+										</tr>
+
+									</tbody>
+
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<div class="modal fade" id="add-modal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form autocomplete="off" id="quickForm" action="#"
+						th:action="@{/entrDetails}" th:object="${entreprise}"
+						method="post" class="form-signin" role="form">
+						<div class="modal-header">
+							<h4 class="modal-title">Gestion Entreprise</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								id="closeMod" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card-body">
+								<div class="row">
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputlibelle1">Nom</label> <input
+												type="text" th:field="*{libelle}" name="libelle"
+												class="form-control" id="exampleInputLibelle1"
+												placeholder="Enter Libelle">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Email</label> <input
+												type="Email" th:field="*{email}" name="email"
+												class="form-control" id="exampleInputEmail1"
+												placeholder="Enter email">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputTele1">Tele</label> <input type="tel"
+												th:field="*{tele}" name="tele" class="form-control"
+												id="exampleInputTele1" placeholder="Enter Telephone">
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+
+									<div class="col-sm-8">
+										<div class="form-group">
+											<label for="exampleInputAdresse1">Adresse</label> <input
+												type="text" th:field="*{adresse}" name="adresse"
+												class="form-control" id="exampleInputAdresse1"
+												placeholder="Enter Adresse">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputVille1">Ville</label> <input
+												type="text" th:field="*{ville}" name="ville"
+												class="form-control" id="exampleInputVille1"
+												placeholder="Enter Ville">
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button id="closeMod" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<div class="modal fade" id="update-modal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form autocomplete="off" id="quickForm" action="#"
+						th:action="@{/entrDetails/update}" method="post"
+						class="form-signin" role="form">
+						<div class="modal-header">
+							<h4 class="modal-title">Gestion Entreprise</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								id="closeMod" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card-body">
+								<div class="row">
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateLibelle2">Nom</label> <input type="text"
+												name="libelle" class="form-control" id="updateLibelle2"
+												placeholder="Enter Libelle">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateEmail1">Email</label> <input type="Email"
+												name="email" class="form-control" id="updateEmail2"
+												placeholder="Enter email">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateTele2">Tele</label> <input type="tel"
+												name="tele" class="form-control" id="updateTele2"
+												placeholder="Enter Telephone">
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+
+									<div class="col-sm-8">
+										<div class="form-group">
+											<label for="updateAdresse2">Adresse</label> <input
+												type="text" name="adresse" class="form-control"
+												id="updateAdresse2" placeholder="Enter Adresse">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateVille1">Ville</label> <input type="text"
+												name="ville" class="form-control" id="updateVille2"
+												placeholder="Enter Ville">
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button id="closeMod" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+							<input type="hidden" name="idE" id="idE">
+							<button type="submit" id="updateEntr" class="btn btn-info">Modifier</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<div class="modal fade" id="delete-modal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<form autocomplete="off" action="#"
+						th:action="@{/entrDetails/delete}" method="post"
+						class="form-signin" role="form">
+						<div class="modal-header">
+							<h5 class="modal-title">Confirm Delete Request !!</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-danger">Delete</button>
+							<input type="hidden" name="idE" id="idE">
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+
+		<footer th:insert="footer.html" class="main-footer"></footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
 	</div>
-	<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	
-  <div class="modal fade" id="delete-modal">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <form autocomplete="off" action="#" th:action="@{/entrDetails/delete}" method="post" class="form-signin" role="form">
-            <div class="modal-header">
-              <h5 class="modal-title">Confirm Delete Request !!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger">Delete</button>
-              <input type="hidden" name="idE" id="idE">
-            </div>
-            </form>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-  
-  <footer th:insert="footer.html" class="main-footer"></footer>
+	<!-- ./wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+	<!-- jQuery -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- DataTables -->
+	<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script
+		src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<!-- jquery-validation -->
+	<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+	<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+	<!-- Toastr -->
+	<script src="plugins/toastr/toastr.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="js/demo.js"></script>
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- jquery-validation -->
-<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="plugins/jquery-validation/additional-methods.min.js"></script>
-<!-- Toastr -->
-<script src="plugins/toastr/toastr.min.js"></script>
-<!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
-
-<!-- page script -->
-<script src="scripts/entrScript.js"></script>
+	<!-- page script -->
+	<script src="scripts/entrScript.js"></script>
 
 
 </body>
