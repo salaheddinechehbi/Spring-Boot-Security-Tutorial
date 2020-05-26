@@ -105,8 +105,8 @@
                   <td th:text="${entr.adresse}"></td>
                   <td th:text="${entr.ville}"></td>
                   <td>
-                  	<a href="" type="button" class="btn btn btn-block btn-outline-info">Modifier</a>
-                  	<a href="" type="button" th:href="@{/entrDetails/delete/{id}(id=${entr.id})}" class="btn btn btn-block btn-outline-danger" >Supprimer</a>
+                  	<a href="#" type="button" data-toggle="modal" data-target="#modal-xl" class="btn btn btn-block btn-outline-info" id="editEntr">Modifier</a>
+                  	<a href="#" type="button" th:href="@{/entrDetails/delete/{id}(id=${entr.id})}" class="btn btn btn-block btn-outline-danger" >Supprimer</a>
                   </td>
                 </tr>
                
@@ -131,7 +131,7 @@
           <div class="modal-content">
             <div class="modal-header">
 	      <h4 class="modal-title">Default Modal</h4>
-	      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	      <button type="button" class="close" data-dismiss="modal" id="closeMod" aria-label="Close">
 	        <span aria-hidden="true">&times;</span>
 	      </button>
 	    </div>
@@ -182,12 +182,13 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Ajouter</button>
+                  <button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
+                  <button id="updateEntr" class="btn btn-info" disabled="disabled">Modifier</button>
                 </div>
               </form>
 	    </div>
 	    <div class="modal-footer justify-content-between">
-	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      <button type="button" id="closeMod" class="btn btn-default" data-dismiss="modal">Close</button>
 	    </div>
 	  </div>
 	  <!-- /.modal-content -->
@@ -224,80 +225,10 @@
 <script src="js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/demo.js"></script>
+
 <!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-<script type="text/javascript">
-$(document).ready(function () {
-  $('#quickForm').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      libelle: {
-          required: true,
-        },
-      ville: {
-          required: true,
-        },
-      adresse: {
-          required: true,
-        },
-        tele: {
-            required: true,
-          }
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-      },
-      libelle: {
-        required: "Please provide a libelle",
-      },
-      ville: {
-          required: "Please provide a ville",
-        },
-      adresse: {
-          required: "Please provide a adresse",
-        },
-        tele: {
-            required: "Please provide a tele",
-          }
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
-</script>
-<script type="text/javascript">
+<script src="scripts/entrScript.js"></script>
 
 
-</script>
 </body>
 </html>

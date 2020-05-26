@@ -1,5 +1,7 @@
 package com.sec.ma.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,7 @@ public class EntrepriseController {
 		modelAndView.addObject("entreprise", new Entreprise());
 		modelAndView.addObject("listEntr", entrepriseService.findAll());
 		modelAndView.setViewName("entrDetails");
+		
 		return modelAndView;
 	}
 	
