@@ -29,7 +29,6 @@ public class EntrepriseController {
 	@GetMapping
 	public ModelAndView entreprise() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("successEnt", "Please correct");
 		modelAndView.addObject("entreprise", new Entreprise());
 		modelAndView.addObject("listEntr", entrepriseService.findAll());
 		modelAndView.setViewName("entrDetails");
@@ -54,11 +53,31 @@ public class EntrepriseController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/delete/{id}")
-	public ModelAndView deleteEntreprise(@PathVariable(value = "id") int  id) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/entrDetails");
+	@PostMapping("/update")
+	public ModelAndView updateEntreprise(@Valid Entreprise entreprise, BindingResult bindingResult, ModelMap modelMap) {
+		ModelAndView modelAndView = new ModelAndView();
 		// Check for the validations
+		if(bindingResult.hasErrors()) {
+			modelAndView.addObject("successMessage", "Please correct the errors in form!");
+			modelMap.addAttribute("bindingResult", bindingResult);
+		}else {
+			entrepriseService.save(entreprise);
+			modelAndView.addObject("successMessage", "Entreprise is registered successfully!");
+		}
+		modelAndView.addObject("entreprise", new Entreprise());
+		modelAndView.addObject("listEntr", entrepriseService.findAll());
+		modelAndView.setViewName("entrDetails");
+		
+		return modelAndView;
+	}
+	
+	
+	@PostMapping("/delete")
+	public ModelAndView deleteEntr(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/entrDetails");
+		int id = Integer.parseInt(request.getParameter("idE"));
 		entrepriseService.delete(id);
+		modelAndView.addObject("successMessage", "Enteprise Deleted");
 		return modelAndView;
 	}
 	

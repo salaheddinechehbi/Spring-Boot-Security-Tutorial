@@ -64,7 +64,7 @@
               <!-- /.card-header -->
               <!-- form start -->
                 <div class="card-body">
-                	<button class="btn btn-success"  data-toggle="modal" data-target="#modal-xl">Ajouter</button>
+                	<button class="btn btn-success"  data-toggle="modal" data-target="#add-modal">Ajouter</button>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -105,8 +105,9 @@
                   <td th:text="${entr.adresse}"></td>
                   <td th:text="${entr.ville}"></td>
                   <td>
-                  	<a href="#" type="button" data-toggle="modal" data-target="#modal-xl" class="btn btn btn-block btn-outline-info" id="editEntr">Modifier</a>
-                  	<a href="#" type="button" th:href="@{/entrDetails/delete/{id}(id=${entr.id})}" class="btn btn btn-block btn-outline-danger" >Supprimer</a>
+                  	<a href="#" type="button" data-toggle="modal" data-target="#add-modal" class="btn btn btn-block btn-outline-info" id="editEntr">Modifier</a>
+                  	<a href="#" type="button" data-toggle="modal" data-target="#delete-modal" class="btn btn btn-block btn-outline-danger" id="deleteEntr">Supprimer</a>
+                  	<input type="hidden" id="idEntr" th:value="${entr.id}">
                   </td>
                 </tr>
                
@@ -126,7 +127,7 @@
   </div>
   <!-- /.content-wrapper -->
   
-  <div class="modal fade" id="modal-xl">
+  <div class="modal fade" id="add-modal">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -188,7 +189,7 @@
               </form>
 	    </div>
 	    <div class="modal-footer justify-content-between">
-	      <button type="button" id="closeMod" class="btn btn-default" data-dismiss="modal">Close</button>
+	      <button id="closeMod" class="btn btn-default" data-dismiss="modal">Close</button>
 	    </div>
 	  </div>
 	  <!-- /.modal-content -->
@@ -196,6 +197,28 @@
 	<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+	
+  <div class="modal fade" id="delete-modal">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <form autocomplete="off" action="#" th:action="@{/entrDetails/delete}" method="post" class="form-signin" role="form">
+            <div class="modal-header">
+              <h5 class="modal-title">Confirm Delete Request !!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+              <input type="hidden" name="idE" id="idE">
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
   
   <footer th:insert="footer.html" class="main-footer"></footer>
 
