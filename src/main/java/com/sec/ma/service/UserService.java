@@ -28,4 +28,10 @@ public class UserService {
 		return userReporitory.findAll();
 	}
 	
+	public void delete(int id) {
+		
+		userReporitory.deleteById(id);
+		
+	}
+	
 }

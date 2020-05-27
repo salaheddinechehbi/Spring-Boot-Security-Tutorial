@@ -48,21 +48,101 @@
 
     <!-- Main content -->
     <section class="content">
-    
-				<span th:utext="${successMessage}"></span>
 				
       <div class="row">
-          <!-- left column -->
-          <div class="col-md-12">
-            <!-- jquery validation -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Gestion Users</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form autocomplete="off" id="quickForm" action="#" th:action="@{/userDetails}" th:object="${user}" method="post" class="form-signin" role="form">
-                <div class="card-body">
+					<!-- left column -->
+					<div class="col-md-12">
+						<!-- jquery validation -->
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Gestion User</h3>
+							</div>
+							<!-- /.card-header -->
+							<!-- form start -->
+							<div class="card-body">
+								<button class="btn btn-success" data-toggle="modal"
+									data-target="#add-modal">Ajouter</button>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!--/.col (left) -->
+					<!-- right column -->
+					<div class="col-md-6"></div>
+					<!--/.col (right) -->
+				</div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Users DataTable</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Login</th>
+                  <th>Tele</th>
+                  <th>Role</th>
+                  <th>Compte</th>
+                  <th>Modification</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr th:each="us : ${listUsers}">
+                  <td th:text="${us.nom}"></td>
+                  <td th:text="${us.email}"></td>
+                  <td th:text="${us.username}"></td>
+                  <td th:text="${us.tele}"></td>
+                  <td th:text="${us.roles}"></td>
+                  <td th:text="${us.active} ? 'Active' : 'Non-Ative' "></td>
+                  <td><a href="#" type="button" data-toggle="modal"
+												data-target="#update-modal"
+												class="btn btn btn-block btn-outline-info" id="editUser">Modifier</a>
+												<a href="#" type="button" data-toggle="modal"
+												data-target="#delete-modal"
+												class="btn btn btn-block btn-outline-danger" id="deleteUser">Supprimer</a>
+												<input type="hidden" id="idUser" th:value="${us.id}">
+											</td>
+                </tr>
+               
+                </tbody>
+                
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <div class="modal fade" id="add-modal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form autocomplete="off" id="quickForm" action="#"
+						th:action="@{/userDetails}" th:object="${user}"
+						method="post" class="form-signin" role="form">
+						<div class="modal-header">
+							<h4 class="modal-title">Gestion User</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								id="closeMod" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card-body">
+								
                 	<div class="row">
                 	
               			<div class="col-sm-4">
@@ -129,74 +209,144 @@
                   		</div>
                   		
                   	</div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- /.card -->
-            </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
-        </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Users DataTable</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Nom</th>
-                  <th>Email</th>
-                  <th>Login</th>
-                  <th>Tele</th>
-                  <th>Role</th>
-                  <th>Compte</th>
-                  <th>Modification</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                <tr th:each="us : ${listUsers}">
-                  <td th:text="${us.nom}"></td>
-                  <td th:text="${us.email}"></td>
-                  <td th:text="${us.username}"></td>
-                  <td th:text="${us.tele}"></td>
-                  <td th:text="${us.roles}"></td>
-                  <td th:text="${us.active} ? 'Active' : 'Non-Ative' ">
-                  </td>
-                  <td>
-                  	<a href="" type="button" class="btn btn btn-block btn-outline-info" >Modifier</a>
-                  	<a href="" type="button" class="btn btn btn-block btn-outline-danger" >Supprimer</a>
-                  </td>
-                </tr>
-               
-                </tbody>
-                
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button id="closeMod" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
   
+  <div class="modal fade" id="update-modal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form autocomplete="off" id="quickForm" action="#"
+						th:action="@{/userDetails/update}" th:object="${user}"
+						method="post" class="form-signin" role="form">
+						<div class="modal-header">
+							<h4 class="modal-title">Gestion User</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								id="closeMod" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card-body">
+								
+                	<div class="row">
+                	
+              			<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="updateNom1">Nom</label>
+                    			<input type="text" th:field="*{nom}" name="nom" class="form-control" id="updateNom1" placeholder="Enter Nom">
+                  			</div>
+                  		</div>
+                  		
+              			<div class="col-sm-4">
+		                  <div class="form-group">
+		                    <label for="updateEmail1">Email Address</label>
+		                    <input type="Email" th:field="*{email}" name="email" class="form-control" id="updateEmail1" placeholder="Enter email">
+		                  </div>
+                  		</div>
+
+						<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="updateLogin1">Login</label>
+                    			<input type="text" th:field="*{username}" name="username" class="form-control" id="updateLogin1" placeholder="Enter Login">
+                  			</div>
+                  		</div>
+                  		
+                  	</div>
+                  	<div class="row">
+                	
+                  		<div class="col-sm-4">
+		                  <div class="form-group">
+		                    <label for="updateTele1">Tele</label>
+		                    <input type="tel" th:field="*{tele}" name="tele" class="form-control" id="updateTele1" placeholder="Telephone">
+		                  </div>
+                  		</div>
+
+						<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="updateRole1">Role</label>
+                    			<select th:field="*{roles}" name="role" id="updateRole1" class="form-control select2" style="width: 100%;">
+				                    <option value="#" selected="selected">Choisir Le Role !!</option>
+				                    <option value="ROLE_ADMIN">ADMIN</option>
+				                    <option value="ROLE_USER">USER</option>
+				                </select>
+                  			</div>
+                  		</div>
+                  		
+                  		<div class="col-sm-4">
+                 			<div class="form-group">
+                   				<label for="updateActive1">Etat Compte</label>
+                    			<select th:field="*{active}" name="active" id="updateActive1"  class="form-control select2" style="width: 100%;">
+				                    <option value="1" selected="selected">ACTIVE</option>
+				                    <option value="0">NON-ACTIVE</option>
+				                </select>
+                  			</div>
+                  		</div>
+                  		
+                  	</div>
+                  	
+                  	<div class="row">
+                	
+                  		<div class="col-sm-4">
+		                  <div class="form-group">
+		                    <label for="updatePassword1">Password</label>
+		                    <input type="password" th:field="*{password}" name="password" class="form-control" id="updatePassword1" placeholder="Password">
+		                  </div>
+                  		</div>
+                  		
+                  	</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button id="closeMod" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" id="updateUser" class="btn btn-success">Ajouter</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+  
+  <div class="modal fade" id="delete-modal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<form autocomplete="off" action="#"
+						th:action="@{/userDetails/delete}" method="post"
+						class="form-signin" role="form">
+						<div class="modal-header">
+							<h5 class="modal-title">Confirm Delete Request !!</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-danger">Delete</button>
+							<input type="hidden" name="idU" id="idU">
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		
   <footer th:insert="footer.html" class="main-footer"></footer>
 
   <!-- Control Sidebar -->
@@ -224,77 +374,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="js/demo.js"></script>
 <!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-<script type="text/javascript">
-$(document).ready(function () {
-  $('#quickForm').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      nom: {
-          required: true,
-        },
-      role: {
-          required: true,
-        },
-      username: {
-          required: true,
-          minlength: 5
-        },
-        tele: {
-            required: true,
-          }
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a vaild email address"
-      },
-      nom: {
-        required: "Please provide a name",
-      },
-      role: {
-          required: "Please provide a role",
-        },
-      username: {
-          required: "Please provide a login",
-          minlength: "Your login must be at least 5 characters long"
-        },
-        tele: {
-            required: "Please provide a tele",
-          }
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
-</script>
+
+
+	<script src="scripts/userScript.js"></script>
 </body>
 </html>
