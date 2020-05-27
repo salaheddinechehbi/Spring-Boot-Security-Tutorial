@@ -75,6 +75,41 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	@PostMapping("/update")
+	public ModelAndView updateUser(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/userDetails");
+		int id = Integer.parseInt(request.getParameter("idU"));
+		boolean active = Boolean.parseBoolean(request.getParameter("active"));
+		String nom = request.getParameter("nom");
+		String tele = request.getParameter("tele");
+		String email = request.getParameter("email");
+		String roles = request.getParameter("role");
+		userService.updateUser(nom, email, active, roles, tele, id);
+		return modelAndView;
+	}
+	
+	@PostMapping("/update2")
+	public ModelAndView updateUser2(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/userDetails");
+		int id = Integer.parseInt(request.getParameter("idU"));
+		boolean active = Boolean.parseBoolean(request.getParameter("active"));
+		String nom = request.getParameter("nom");
+		String tele = request.getParameter("tele");
+		String email = request.getParameter("email");
+		String roles = request.getParameter("role");
+		User user = new User();
+		user = userService.findById(id);
+		user.setId(id);
+		user.setEmail(email);
+		user.setNom(nom);
+		user.setRoles(roles);
+		user.setTele(tele);
+		user.setActive(active);
+		
+		userService.save(user);
+		return modelAndView;
+	}
+	
 	
 	
 	

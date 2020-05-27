@@ -84,24 +84,17 @@ $(document).ready(function () {
 		    $('#update-modal #idU').val(id);
 		 });
 	  
-	  //$(document).on('click','#updateEntr',function(){
-		  	
-		//  	$('#update-modal #idE').val($('#idEntr').val());
-		  //	console.log("kjlllllll " + $('#update-modal #idE').val());
-		 //});
-	  
 	  $(document).on('click','#deleteUser',function(){
 		  	let id = $(this).parent().find('#idUser').val();
 		  	$('#delete-modal #idU').val(id);
-		  	console.log($('#delete-modal #idU').val());
+		  	$('#update-modal #idU').val(id);
 		 });
 
 		$(document).on('click','#closeMod',function(){
-		    $("#exampleInputLibelle1").val("");
+		    $("#exampleInputNom1").val("");
 		    $("#exampleInputEmail1").val("");
 		    $("#exampleInputTele1").val("");
-		    $("#exampleInputAdresse1").val("");
-		    $("#exampleInputVille1").val("");
+		    $("#exampleInputLogin1").val("");
 		 });
 	  
 	  

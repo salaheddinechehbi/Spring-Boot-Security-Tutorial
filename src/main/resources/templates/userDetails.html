@@ -180,9 +180,8 @@
                  			<div class="form-group">
                    				<label for="exampleInputRole1">Role</label>
                     			<select th:field="*{roles}" name="role" id="exampleInputRole1" class="form-control select2" style="width: 100%;">
-				                    <option value="#" selected="selected">Choisir Le Role !!</option>
 				                    <option value="ROLE_ADMIN">ADMIN</option>
-				                    <option value="ROLE_USER">USER</option>
+				                    <option value="ROLE_USER" selected="selected">USER</option>
 				                </select>
                   			</div>
                   		</div>
@@ -215,7 +214,7 @@
 						<div class="modal-footer justify-content-between">
 							<button id="closeMod" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
-							<button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
+							<button type="submit" id="addUser" class="btn btn-success">Ajouter</button>
 						</div>
 					</form>
 				</div>
@@ -228,7 +227,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/userDetails/update}" th:object="${user}"
+						th:action="@{/userDetails/update}"
 						method="post" class="form-signin" role="form">
 						<div class="modal-header">
 							<h4 class="modal-title">Gestion User</h4>
@@ -245,41 +244,34 @@
               			<div class="col-sm-4">
                  			<div class="form-group">
                    				<label for="updateNom1">Nom</label>
-                    			<input type="text" th:field="*{nom}" name="nom" class="form-control" id="updateNom1" placeholder="Enter Nom">
+                    			<input type="text" name="nom" class="form-control" id="updateNom1" placeholder="Enter Nom">
                   			</div>
                   		</div>
                   		
               			<div class="col-sm-4">
 		                  <div class="form-group">
 		                    <label for="updateEmail1">Email Address</label>
-		                    <input type="Email" th:field="*{email}" name="email" class="form-control" id="updateEmail1" placeholder="Enter email">
+		                    <input type="Email" name="email" class="form-control" id="updateEmail1" placeholder="Enter email">
 		                  </div>
                   		</div>
 
 						<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="updateLogin1">Login</label>
-                    			<input type="text" th:field="*{username}" name="username" class="form-control" id="updateLogin1" placeholder="Enter Login">
-                  			</div>
+		                  <div class="form-group">
+		                    <label for="updateTele1">Tele</label>
+		                    <input type="tel" name="tele" class="form-control" id="updateTele1" placeholder="Telephone">
+		                  </div>
                   		</div>
                   		
                   	</div>
                   	<div class="row">
                 	
-                  		<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="updateTele1">Tele</label>
-		                    <input type="tel" th:field="*{tele}" name="tele" class="form-control" id="updateTele1" placeholder="Telephone">
-		                  </div>
-                  		</div>
 
 						<div class="col-sm-4">
                  			<div class="form-group">
                    				<label for="updateRole1">Role</label>
-                    			<select th:field="*{roles}" name="role" id="updateRole1" class="form-control select2" style="width: 100%;">
-				                    <option value="#" selected="selected">Choisir Le Role !!</option>
+                    			<select name="role" id="updateRole1" class="form-control select2" style="width: 100%;">
 				                    <option value="ROLE_ADMIN">ADMIN</option>
-				                    <option value="ROLE_USER">USER</option>
+				                    <option value="ROLE_USER" selected="selected">USER</option>
 				                </select>
                   			</div>
                   		</div>
@@ -287,22 +279,11 @@
                   		<div class="col-sm-4">
                  			<div class="form-group">
                    				<label for="updateActive1">Etat Compte</label>
-                    			<select th:field="*{active}" name="active" id="updateActive1"  class="form-control select2" style="width: 100%;">
-				                    <option value="1" selected="selected">ACTIVE</option>
-				                    <option value="0">NON-ACTIVE</option>
+                    			<select name="active" id="updateActive1"  class="form-control select2" style="width: 100%;">
+				                    <option value="true" selected="selected">ACTIVE</option>
+				                    <option value="false">NON-ACTIVE</option>
 				                </select>
                   			</div>
-                  		</div>
-                  		
-                  	</div>
-                  	
-                  	<div class="row">
-                	
-                  		<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="updatePassword1">Password</label>
-		                    <input type="password" th:field="*{password}" name="password" class="form-control" id="updatePassword1" placeholder="Password">
-		                  </div>
                   		</div>
                   		
                   	</div>
@@ -312,7 +293,8 @@
 						<div class="modal-footer justify-content-between">
 							<button id="closeMod" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
-							<button type="submit" id="updateUser" class="btn btn-success">Ajouter</button>
+							<input type="hidden" name="idU" id="idU">
+							<button type="submit" id="updateUser" class="btn btn-info">Modifier</button>
 						</div>
 					</form>
 				</div>
