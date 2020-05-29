@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sec.ma.entities.User;
 import com.sec.ma.service.UserService;
@@ -58,7 +59,7 @@ public class UserController {
 			modelMap.addAttribute("bindingResult", bindingResult);
 		}else {
 			userService.save(user);
-			modelAndView.addObject("successMessage", "User is registered successfully!");
+			modelAndView.addObject("successMessage", "Ajouter");
 		}
 		modelAndView.addObject("user", new User());
 		modelAndView.addObject("listUsers", userService.findAll());
@@ -67,16 +68,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/delete")
-	public ModelAndView deleteUser(HttpServletRequest request) {
+	public ModelAndView deleteUser(HttpServletRequest request,RedirectAttributes redir) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/userDetails");
 		int id = Integer.parseInt(request.getParameter("idU"));
 		userService.delete(id);
-		modelAndView.addObject("successMessage", "User Deleted");
+		redir.addFlashAttribute("successMessage", "Supprimer");
 		return modelAndView;
 	}
 	
 	@PostMapping("/update")
-	public ModelAndView updateUser(HttpServletRequest request) {
+	public ModelAndView updateUser(HttpServletRequest request,RedirectAttributes redir) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/userDetails");
 		int id = Integer.parseInt(request.getParameter("idU"));
 		boolean active = Boolean.parseBoolean(request.getParameter("active"));
@@ -85,6 +86,7 @@ public class UserController {
 		String email = request.getParameter("email");
 		String roles = request.getParameter("role");
 		userService.updateUser(nom, email, active, roles, tele, id);
+		redir.addFlashAttribute("successMessage", "Modifier");
 		return modelAndView;
 	}
 	

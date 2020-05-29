@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sec.ma.entities.Entreprise;
 import com.sec.ma.service.EntrepriseService;
@@ -44,7 +45,7 @@ public class EntrepriseController {
 			modelAndView.addObject("successMessage", "Please correct the errors in form!");
 		}else {
 			entrepriseService.save(entreprise);
-			modelAndView.addObject("successMessage", "Entreprise is registered successfully!");
+			modelAndView.addObject("successMessage", "Ajouter");
 		}
 		modelAndView.addObject("entreprise", new Entreprise());
 		modelAndView.addObject("listEntr", entrepriseService.findAll());
@@ -54,7 +55,7 @@ public class EntrepriseController {
 	}
 	
 	@PostMapping("/update")
-	public ModelAndView updateEntreprise(HttpServletRequest request, Model model) {
+	public ModelAndView updateEntreprise(HttpServletRequest request,RedirectAttributes redir) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/entrDetails");
 		Entreprise entreprise = new Entreprise();
 		try{
@@ -67,8 +68,7 @@ public class EntrepriseController {
 		    entreprise.setId(Integer.parseInt(request.getParameter("idE")));
 		    
 			entrepriseService.save(entreprise);
-			model.addAttribute("successMessage", "update");
-			
+			redir.addFlashAttribute("successMessage", "Modifier");
 		} catch(NumberFormatException ex){ // handle your exception
 		    System.out.println("Format id " + entreprise.getLibelle() + "  :  " + entreprise.getId());
 		}
@@ -77,11 +77,11 @@ public class EntrepriseController {
 	
 	
 	@PostMapping("/delete")
-	public ModelAndView deleteEntr(HttpServletRequest request) {
+	public ModelAndView deleteEntr(HttpServletRequest request,RedirectAttributes redir) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/entrDetails");
 		int id = Integer.parseInt(request.getParameter("idE"));
 		entrepriseService.delete(id);
-		modelAndView.addObject("successMessage", "Enteprise Deleted");
+		redir.addFlashAttribute("successMessage", "Supprimer");
 		return modelAndView;
 	}
 	

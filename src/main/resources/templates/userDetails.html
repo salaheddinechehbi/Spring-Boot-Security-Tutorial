@@ -1,55 +1,69 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sport-Travel | Users</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Sport-Travel | Users</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- DataTables -->
+<link rel="stylesheet"
+	href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet"
+	href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/adminlte.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
- 
- <!-- Navbar -->
-  <nav th:insert="nav.html" class="main-header navbar navbar-expand navbar-white navbar-light"></nav>
-  <!-- /.navbar -->
-  <!-- Main Sidebar Container -->
-  <aside th:insert="sideBar.html :: sideBar" class="main-sidebar sidebar-dark-primary elevation-4"></aside>
-  
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h3>Users</h3>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Users</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+	<div class="wrapper">
 
-    <!-- Main content -->
-    <section class="content">
-				
-      <div class="row">
+		<!-- Navbar -->
+		<nav th:insert="nav.html"
+			class="main-header navbar navbar-expand navbar-white navbar-light"></nav>
+		<!-- /.navbar -->
+		<!-- Main Sidebar Container -->
+		<aside th:insert="sideBar.html :: sideBar"
+			class="main-sidebar sidebar-dark-primary elevation-4"></aside>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h3>Users</h3>
+						</div>
+						<div class="col-sm-6">
+							<ol class="breadcrumb float-sm-right">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active">Users</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<div class="row">
 					<!-- left column -->
 					<div class="col-md-12">
 						<!-- jquery validation -->
@@ -72,67 +86,66 @@
 					<div class="col-md-6"></div>
 					<!--/.col (right) -->
 				</div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Users DataTable</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Nom</th>
-                  <th>Email</th>
-                  <th>Login</th>
-                  <th>Tele</th>
-                  <th>Role</th>
-                  <th>Compte</th>
-                  <th>Modification</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                <tr th:each="us : ${listUsers}">
-                  <td th:text="${us.nom}"></td>
-                  <td th:text="${us.email}"></td>
-                  <td th:text="${us.username}"></td>
-                  <td th:text="${us.tele}"></td>
-                  <td th:text="${us.roles}"></td>
-                  <td th:text="${us.active} ? 'Active' : 'Non-Ative' "></td>
-                  <td><a href="#" type="button" data-toggle="modal"
-												data-target="#update-modal"
-												class="btn btn btn-block btn-outline-info" id="editUser">Modifier</a>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Users DataTable</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<table id="example2" class="table table-striped">
+									<thead>
+										<tr>
+											<th>Nom</th>
+											<th>Email</th>
+											<th>Login</th>
+											<th>Tele</th>
+											<th>Role</th>
+											<th>Compte</th>
+											<th>Modification</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr th:each="us : ${listUsers}">
+											<td th:text="${us.nom}"></td>
+											<td th:text="${us.email}"></td>
+											<td th:text="${us.username}"></td>
+											<td th:text="${us.tele}"></td>
+											<td th:text="${us.roles}"></td>
+											<td th:text="${us.active} ? 'Active' : 'Non-Ative' "></td>
+											<td><a href="#" type="button" data-toggle="modal"
+												data-target="#update-modal" class="btn btn-info btn-sm"
+												id="editUser"><i class="fas fa-pencil-alt"> </i>Modifier</a>
 												<a href="#" type="button" data-toggle="modal"
-												data-target="#delete-modal"
-												class="btn btn btn-block btn-outline-danger" id="deleteUser">Supprimer</a>
-												<input type="hidden" id="idUser" th:value="${us.id}">
-											</td>
-                </tr>
-               
-                </tbody>
-                
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
-  <div class="modal fade" id="add-modal">
+												data-target="#delete-modal" class="btn btn-danger btn-sm"
+												id="deleteUser"><i class="fas fa-trash"> </i>Supprimer</a> <input
+												type="hidden" id="idUser" th:value="${us.id}"></td>
+										</tr>
+
+									</tbody>
+
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<div class="modal fade" id="add-modal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/userDetails}" th:object="${user}"
-						method="post" class="form-signin" role="form">
+						th:action="@{/userDetails}" th:object="${user}" method="post"
+						class="form-signin" role="form">
 						<div class="modal-header">
 							<h4 class="modal-title">Gestion User</h4>
 							<button type="button" class="close" data-dismiss="modal"
@@ -142,72 +155,82 @@
 						</div>
 						<div class="modal-body">
 							<div class="card-body">
-								
-                	<div class="row">
-                	
-              			<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="exampleInputNom1">Nom</label>
-                    			<input type="text" th:field="*{nom}" name="nom" class="form-control" id="exampleInputNom1" placeholder="Enter Nom">
-                  			</div>
-                  		</div>
-                  		
-              			<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="exampleInputEmail1">Email Address</label>
-		                    <input type="Email" th:field="*{email}" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-		                  </div>
-                  		</div>
 
-						<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="exampleInputLogin1">Login</label>
-                    			<input type="text" th:field="*{username}" name="username" class="form-control" id="exampleInputLogin1" placeholder="Enter Login">
-                  			</div>
-                  		</div>
-                  		
-                  	</div>
-                  	<div class="row">
-                	
-                  		<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="exampleInputTele1">Tele</label>
-		                    <input type="tel" th:field="*{tele}" name="tele" class="form-control" id="exampleInputTele1" placeholder="Telephone">
-		                  </div>
-                  		</div>
+								<div class="row">
 
-						<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="exampleInputRole1">Role</label>
-                    			<select th:field="*{roles}" name="role" id="exampleInputRole1" class="form-control select2" style="width: 100%;">
-				                    <option value="ROLE_ADMIN">ADMIN</option>
-				                    <option value="ROLE_USER" selected="selected">USER</option>
-				                </select>
-                  			</div>
-                  		</div>
-                  		
-                  		<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="exampleInputActive1">Etat Compte</label>
-                    			<select th:field="*{active}" name="active" id="exampleInputActive1"  class="form-control select2" style="width: 100%;">
-				                    <option value="1" selected="selected">ACTIVE</option>
-				                    <option value="0">NON-ACTIVE</option>
-				                </select>
-                  			</div>
-                  		</div>
-                  		
-                  	</div>
-                  	
-                  	<div class="row">
-                	
-                  		<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="exampleInputPassword1">Password</label>
-		                    <input type="password" th:field="*{password}" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-		                  </div>
-                  		</div>
-                  		
-                  	</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputNom1">Nom</label> <input type="text"
+												th:field="*{nom}" name="nom" class="form-control"
+												id="exampleInputNom1" placeholder="Enter Nom">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Email Address</label> <input
+												type="Email" th:field="*{email}" name="email"
+												class="form-control" id="exampleInputEmail1"
+												placeholder="Enter email">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputLogin1">Login</label> <input
+												type="text" th:field="*{username}" name="username"
+												class="form-control" id="exampleInputLogin1"
+												placeholder="Enter Login">
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputTele1">Tele</label> <input type="tel"
+												th:field="*{tele}" name="tele" class="form-control"
+												id="exampleInputTele1" placeholder="Telephone">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputRole1">Role</label> <select
+												th:field="*{roles}" name="role" id="exampleInputRole1"
+												class="form-control select2" style="width: 100%;">
+												<option value="ROLE_ADMIN">ADMIN</option>
+												<option value="ROLE_USER" selected="selected">USER</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputActive1">Etat Compte</label> <select
+												th:field="*{active}" name="active" id="exampleInputActive1"
+												class="form-control select2" style="width: 100%;">
+												<option value="1" selected="selected">ACTIVE</option>
+												<option value="0">NON-ACTIVE</option>
+											</select>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputPassword1">Password</label> <input
+												type="password" th:field="*{password}" name="password"
+												class="form-control" id="exampleInputPassword1"
+												placeholder="Password">
+										</div>
+									</div>
+
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -222,13 +245,13 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-  
-  <div class="modal fade" id="update-modal">
+
+		<div class="modal fade" id="update-modal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/userDetails/update}"
-						method="post" class="form-signin" role="form">
+						th:action="@{/userDetails/update}" method="post"
+						class="form-signin" role="form">
 						<div class="modal-header">
 							<h4 class="modal-title">Gestion User</h4>
 							<button type="button" class="close" data-dismiss="modal"
@@ -238,55 +261,60 @@
 						</div>
 						<div class="modal-body">
 							<div class="card-body">
-								
-                	<div class="row">
-                	
-              			<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="updateNom1">Nom</label>
-                    			<input type="text" name="nom" class="form-control" id="updateNom1" placeholder="Enter Nom">
-                  			</div>
-                  		</div>
-                  		
-              			<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="updateEmail1">Email Address</label>
-		                    <input type="Email" name="email" class="form-control" id="updateEmail1" placeholder="Enter email">
-		                  </div>
-                  		</div>
 
-						<div class="col-sm-4">
-		                  <div class="form-group">
-		                    <label for="updateTele1">Tele</label>
-		                    <input type="tel" name="tele" class="form-control" id="updateTele1" placeholder="Telephone">
-		                  </div>
-                  		</div>
-                  		
-                  	</div>
-                  	<div class="row">
-                	
+								<div class="row">
 
-						<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="updateRole1">Role</label>
-                    			<select name="role" id="updateRole1" class="form-control select2" style="width: 100%;">
-				                    <option value="ROLE_ADMIN">ADMIN</option>
-				                    <option value="ROLE_USER" selected="selected">USER</option>
-				                </select>
-                  			</div>
-                  		</div>
-                  		
-                  		<div class="col-sm-4">
-                 			<div class="form-group">
-                   				<label for="updateActive1">Etat Compte</label>
-                    			<select name="active" id="updateActive1"  class="form-control select2" style="width: 100%;">
-				                    <option value="true" selected="selected">ACTIVE</option>
-				                    <option value="false">NON-ACTIVE</option>
-				                </select>
-                  			</div>
-                  		</div>
-                  		
-                  	</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateNom1">Nom</label> <input type="text"
+												name="nom" class="form-control" id="updateNom1"
+												placeholder="Enter Nom">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateEmail1">Email Address</label> <input
+												type="Email" name="email" class="form-control"
+												id="updateEmail1" placeholder="Enter email">
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateTele1">Tele</label> <input type="tel"
+												name="tele" class="form-control" id="updateTele1"
+												placeholder="Telephone">
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateRole1">Role</label> <select name="role"
+												id="updateRole1" class="form-control select2"
+												style="width: 100%;">
+												<option value="ROLE_ADMIN">ADMIN</option>
+												<option value="ROLE_USER" selected="selected">USER</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateActive1">Etat Compte</label> <select
+												name="active" id="updateActive1"
+												class="form-control select2" style="width: 100%;">
+												<option value="true" selected="selected">ACTIVE</option>
+												<option value="false">NON-ACTIVE</option>
+											</select>
+										</div>
+									</div>
+
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -302,8 +330,8 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-  
-  <div class="modal fade" id="delete-modal">
+
+		<div class="modal fade" id="delete-modal">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<form autocomplete="off" action="#"
@@ -328,36 +356,83 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		
-  <footer th:insert="footer.html" class="main-footer"></footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+		<footer th:insert="footer.html" class="main-footer"></footer>
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- jquery-validation -->
-<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="plugins/jquery-validation/additional-methods.min.js"></script>
-<!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
-<!-- page script -->
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- jQuery -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- DataTables -->
+	<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script
+		src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<!-- jquery-validation -->
+	<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+	<script src="plugins/jquery-validation/additional-methods.min.js"></script>
+	<!-- SweetAlert2 -->
+	<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+	<!-- Toastr -->
+	<script src="plugins/toastr/toastr.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="js/demo.js"></script>
+	<!-- page script -->
 
 
 	<script src="scripts/userScript.js"></script>
+	<script th:inline="javascript">
+	
+	    var flag = [[${successMessage}]]; //Your Thymleaf variable
+	    window.onload = function() {
+	        if(!flag){
+	        	console.log();
+	        }else{
+	       		const Toast = Swal.mixin({
+	  	        	toast: true,
+	  	        	position: 'top-end',
+	  	        	showConfirmButton: false,
+	  	        	timer: 3000
+	  	        });
+	       		
+	       		if(flag ==="Ajouter"){
+	       			Toast.fire({
+			            type: 'success',
+			            title: 'User Bien Ajouter'
+			         });
+	       		}else if(flag ==="Modifier"){
+	       			Toast.fire({
+			            type: 'success',
+			            title: 'User Bien Modifier'
+			         });
+	       		}else if(flag === "Supprimer"){
+	       			Toast.fire({
+			            type: 'success',
+			            title: 'User Bien Supprimer'
+			         });
+	       		}else{
+	       			Toast.fire({
+			            type: 'error',
+			            title: 'User Details Problem'
+			         });
+	       		}
+	       			
+	        	
+	        }
+	    };	
+</script>
+
 </body>
 </html>
