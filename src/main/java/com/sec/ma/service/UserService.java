@@ -24,9 +24,9 @@ public class UserService {
 		userReporitory.save(user);
 	}
 	
-	public void updateUser(String nom,String email,boolean active,String roles,String tele,int id) {
+	public void updateUser(String email,boolean active,String roles,int id) {
 		
-		userReporitory.updateUser(nom, email, active, roles, tele, id);
+		userReporitory.updateUser(email, active, roles, id);
 	}
 	
 	public List<User> findAll() {
@@ -42,6 +42,11 @@ public class UserService {
 	public void delete(int id) {
 		
 		userReporitory.deleteById(id);
+	}
+	
+	public int countUser() {
+		
+		return userReporitory.countUser();
 	}
 	
 }

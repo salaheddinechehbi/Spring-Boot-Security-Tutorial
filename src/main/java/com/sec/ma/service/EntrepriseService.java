@@ -30,4 +30,10 @@ public class EntrepriseService {
 		
 		return entrepriseRepository.findAll();
 	}
+	
+	public int countEntr() {
+		
+		return entrepriseRepository.countEntr();
+	}
+
 }

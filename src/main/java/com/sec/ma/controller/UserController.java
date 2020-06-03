@@ -81,11 +81,9 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/userDetails");
 		int id = Integer.parseInt(request.getParameter("idU"));
 		boolean active = Boolean.parseBoolean(request.getParameter("active"));
-		String nom = request.getParameter("nom");
-		String tele = request.getParameter("tele");
 		String email = request.getParameter("email");
 		String roles = request.getParameter("role");
-		userService.updateUser(nom, email, active, roles, tele, id);
+		userService.updateUser(email, active, roles, id);
 		redir.addFlashAttribute("successMessage", "Modifier");
 		return modelAndView;
 	}
