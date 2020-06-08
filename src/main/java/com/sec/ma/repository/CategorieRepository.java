@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.sec.ma.entities.Client;
+import com.sec.ma.entities.Categorie;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
 
-	@Query("SELECT COUNT(*) from Client")
-	int countClient();
+	@Query("SELECT COUNT(*) from Categorie")
+	int countCategorie();
 }

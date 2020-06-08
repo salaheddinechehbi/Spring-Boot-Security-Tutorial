@@ -46,12 +46,12 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1>Entreprises</h1>
+							<h1>Categorie</h1>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Entreprises</li>
+								<li class="breadcrumb-item active">Categorie</li>
 							</ol>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 						<!-- jquery validation -->
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Gestion Entreprise</h3>
+								<h3 class="card-title">Gestion Categorie</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
@@ -89,7 +89,7 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Entreprise DataTable</h3>
+								<h3 class="card-title">Categorie DataTable</h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
@@ -97,30 +97,20 @@
 									<thead>
 										<tr>
 											<th>Libelle</th>
-											<th>Email</th>
-											<th>Tele</th>
-											<th>Adresse</th>
-											<th>Ville</th>
-											<th>Categorie</th>
 											<th>Modification</th>
 										</tr>
 									</thead>
 									<tbody>
 
-										<tr th:each="entr : ${listEntr}">
-											<td th:text="${entr.libelle}"></td>
-											<td th:text="${entr.email}"></td>
-											<td th:text="${entr.tele}"></td>
-											<td th:text="${entr.adresse}"></td>
-											<td th:text="${entr.ville}"></td>
-											<td th:text="${entr.categorie.libelle}"></td>
+										<tr th:each="cat : ${listCat}">
+											<td th:text="${cat.libelle}"></td>
 											<td><a href="#" type="button" data-toggle="modal"
 												data-target="#update-modal" class="btn btn-info btn-sm"
-												id="editEntr"><i class="fas fa-pencil-alt"> </i>Modifier</a>
+												id="editCat"><i class="fas fa-pencil-alt"> </i>Modifier</a>
 												<a href="#" type="button" data-toggle="modal"
 												data-target="#delete-modal" class="btn btn-danger btn-sm"
-												id="deleteEntr"><i class="fas fa-trash"> </i>Supprimer</a> <input
-												type="hidden" id="idEntr" th:value="${entr.id}"></td>
+												id="deleteCat"><i class="fas fa-trash"> </i>Supprimer</a> <input
+												type="hidden" id="idCat" th:value="${cat.id}"></td>
 										</tr>
 
 									</tbody>
@@ -141,13 +131,13 @@
 		<!-- /.content-wrapper -->
 
 		<div class="modal fade" id="add-modal">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-md">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/entrDetails}" th:object="${entreprise}"
+						th:action="@{/catDetails}" th:object="${categorie}"
 						method="post" class="form-signin" role="form">
 						<div class="modal-header">
-							<h4 class="modal-title">Gestion Entreprise</h4>
+							<h4 class="modal-title">Gestion Categorie</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								id="closeMod" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -157,60 +147,12 @@
 							<div class="card-body">
 								<div class="row">
 
-									<div class="col-sm-4">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label for="exampleInputlibelle1">Nom</label> <input
 												type="text" th:field="*{libelle}" name="libelle"
 												class="form-control" id="exampleInputLibelle1"
 												placeholder="Enter Libelle">
-										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="exampleInputEmail1">Email</label> <input
-												type="Email" th:field="*{email}" name="email"
-												class="form-control" id="exampleInputEmail1"
-												placeholder="Enter email">
-										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="exampleInputTele1">Tele</label> <input type="tel"
-												th:field="*{tele}" name="tele" class="form-control"
-												id="exampleInputTele1" placeholder="Enter Telephone">
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="exampleInputAdresse1">Adresse</label> <input
-												type="text" th:field="*{adresse}" name="adresse"
-												class="form-control" id="exampleInputAdresse1"
-												placeholder="Enter Adresse">
-										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="exampleInputVille1">Ville</label> <input
-												type="text" th:field="*{ville}" name="ville"
-												class="form-control" id="exampleInputVille1"
-												placeholder="Enter Ville">
-										</div>
-									</div>
-									
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="exampleInputCat1">Etat Compte</label> <select
-												th:field="*{categorie}" name="categorie" id="exampleInputCat1"
-												class="form-control select2" style="width: 100%;">
-												<option th:each="cat : ${listCat}" th:value="${cat.id}" th:text="${cat.libelle}"> selected="selected"></option>
-											</select>
 										</div>
 									</div>
 
@@ -221,7 +163,7 @@
 						<div class="modal-footer justify-content-between">
 							<button id="closeMod" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
-							<button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
+							<button type="submit" id="addCat" class="btn btn-success">Ajouter</button>
 						</div>
 					</form>
 				</div>
@@ -232,13 +174,13 @@
 		<!-- /.modal -->
 
 		<div class="modal fade" id="update-modal">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-md">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/entrDetails/update}" method="post"
+						th:action="@{/catDetails/update}" method="post"
 						class="form-signin" role="form">
 						<div class="modal-header">
-							<h4 class="modal-title">Gestion Entreprise</h4>
+							<h4 class="modal-title">Gestion Categorie</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								id="closeMod" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -248,7 +190,7 @@
 							<div class="card-body">
 								<div class="row">
 
-									<div class="col-sm-4">
+									<div class="col-sm-12">
 										<div class="form-group">
 											<label for="updateLibelle2">Nom</label> <input type="text"
 												name="libelle" class="form-control" id="updateLibelle2"
@@ -256,60 +198,16 @@
 										</div>
 									</div>
 
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="updateEmail1">Email</label> <input type="Email"
-												name="email" class="form-control" id="updateEmail2"
-												placeholder="Enter email">
-										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="updateTele2">Tele</label> <input type="tel"
-												name="tele" class="form-control" id="updateTele2"
-												placeholder="Enter Telephone">
-										</div>
-									</div>
-
 								</div>
-								<div class="row">
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="updateAdresse2">Adresse</label> <input
-												type="text" name="adresse" class="form-control"
-												id="updateAdresse2" placeholder="Enter Adresse">
-										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="updateVille1">Ville</label> <input type="text"
-												name="ville" class="form-control" id="updateVille2"
-												placeholder="Enter Ville">
-										</div>
-									</div>
-									
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="updateCat1">Etat Compte</label> <select
-												 name="categorie" id="exampleInputCat1"
-												class="form-control select2" style="width: 100%;">
-												<option th:each="cat : ${listCat}" th:value="${cat.id}" th:text="${cat.libelle}"> selected="selected"></option>
-											</select>
-										</div>
-									</div>
-
-								</div>
+								
 							</div>
 							<!-- /.card-body -->
 						</div>
 						<div class="modal-footer justify-content-between">
 							<button id="closeMod" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
-							<input type="hidden" name="idE" id="idE">
-							<button type="submit" id="updateEntr" class="btn btn-info">Modifier</button>
+							<input type="hidden" name="idC" id="idC">
+							<button type="submit" id="updateCat" class="btn btn-info">Modifier</button>
 						</div>
 					</form>
 				</div>
@@ -323,7 +221,7 @@
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<form autocomplete="off" action="#"
-						th:action="@{/entrDetails/delete}" method="post"
+						th:action="@{/catDetails/delete}" method="post"
 						class="form-signin" role="form">
 						<div class="modal-header">
 							<h5 class="modal-title">Confirm Delete Request !!</h5>
@@ -336,7 +234,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
 							<button type="submit" class="btn btn-danger">Delete</button>
-							<input type="hidden" name="idE" id="idE">
+							<input type="hidden" name="idC" id="idC">
 						</div>
 					</form>
 				</div>
@@ -379,7 +277,7 @@
 	<script src="js/demo.js"></script>
 
 	<!-- page script -->
-	<script src="scripts/entrScript.js"></script>
+	<script src="scripts/catScript.js"></script>
 	<script th:inline="javascript">
 	
 	    var flag = [[${successMessage}]]; //Your Thymleaf variable
@@ -397,22 +295,22 @@
 	       		if(flag ==="Ajouter"){
 	       			Toast.fire({
 			            type: 'success',
-			            title: 'Entreprise Bien Ajouter'
+			            title: 'Categorie Bien Ajouter'
 			         });
 	       		}else if(flag ==="Modifier"){
 	       			Toast.fire({
 			            type: 'success',
-			            title: 'Entreprise Bien Modifier'
+			            title: 'Categorie Bien Modifier'
 			         });
 	       		}else if(flag === "Supprimer"){
 	       			Toast.fire({
 			            type: 'success',
-			            title: 'Entreprise Bien Supprimer'
+			            title: 'Categorie Bien Supprimer'
 			         });
 	       		}else{
 	       			Toast.fire({
 			            type: 'error',
-			            title: 'Entreprise Details Problem'
+			            title: 'Categorie Details Problem'
 			         });
 	       		}
 	       			

@@ -45,6 +45,15 @@ public class HomeController {
 		return modelAndView;
     }
 	
+	@GetMapping("/")
+	public ModelAndView index2(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("countUser", userService.countUser());
+		modelAndView.addObject("countEntr", entrepriseService.countEntr());
+		modelAndView.setViewName("index");
+		return modelAndView;
+    }
+	
 	@GetMapping("/clientDetails")
 	public ModelAndView client() {
 		ModelAndView modelAndView = new ModelAndView();

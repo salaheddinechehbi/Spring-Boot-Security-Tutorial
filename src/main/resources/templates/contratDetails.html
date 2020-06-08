@@ -101,7 +101,6 @@
 											<th>Tele</th>
 											<th>Adresse</th>
 											<th>Ville</th>
-											<th>Categorie</th>
 											<th>Modification</th>
 										</tr>
 									</thead>
@@ -113,7 +112,6 @@
 											<td th:text="${entr.tele}"></td>
 											<td th:text="${entr.adresse}"></td>
 											<td th:text="${entr.ville}"></td>
-											<td th:text="${entr.categorie.libelle}"></td>
 											<td><a href="#" type="button" data-toggle="modal"
 												data-target="#update-modal" class="btn btn-info btn-sm"
 												id="editEntr"><i class="fas fa-pencil-alt"> </i>Modifier</a>
@@ -186,7 +184,7 @@
 								</div>
 								<div class="row">
 
-									<div class="col-sm-4">
+									<div class="col-sm-8">
 										<div class="form-group">
 											<label for="exampleInputAdresse1">Adresse</label> <input
 												type="text" th:field="*{adresse}" name="adresse"
@@ -201,16 +199,6 @@
 												type="text" th:field="*{ville}" name="ville"
 												class="form-control" id="exampleInputVille1"
 												placeholder="Enter Ville">
-										</div>
-									</div>
-									
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="exampleInputCat1">Etat Compte</label> <select
-												th:field="*{categorie}" name="categorie" id="exampleInputCat1"
-												class="form-control select2" style="width: 100%;">
-												<option th:each="cat : ${listCat}" th:value="${cat.id}" th:text="${cat.libelle}"> selected="selected"></option>
-											</select>
 										</div>
 									</div>
 
@@ -275,7 +263,7 @@
 								</div>
 								<div class="row">
 
-									<div class="col-sm-4">
+									<div class="col-sm-8">
 										<div class="form-group">
 											<label for="updateAdresse2">Adresse</label> <input
 												type="text" name="adresse" class="form-control"
@@ -288,16 +276,6 @@
 											<label for="updateVille1">Ville</label> <input type="text"
 												name="ville" class="form-control" id="updateVille2"
 												placeholder="Enter Ville">
-										</div>
-									</div>
-									
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="updateCat1">Etat Compte</label> <select
-												 name="categorie" id="exampleInputCat1"
-												class="form-control select2" style="width: 100%;">
-												<option th:each="cat : ${listCat}" th:value="${cat.id}" th:text="${cat.libelle}"> selected="selected"></option>
-											</select>
 										</div>
 									</div>
 

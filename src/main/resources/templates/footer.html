@@ -1,6 +1,47 @@
 
+
+	
+	<div class="modal fade" id="profil-modal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+						<div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="img/user4-128x128.jpg"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center" th:text="${#request.userPrincipal.name}"></h3>
+
+                <p class="text-muted text-center" th:text="${#request.userPrincipal.authorities}"></p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Tele</b> <a class="float-right" ></a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Email</b> <a class="float-right" ></a>
+                  </li>
+                </ul>
+              </div>
+						<div class="modal-footer justify-content-between">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+							<button type="submit" class="btn btn-info">Modifier</button>
+							<input type="hidden" name="idU" id="idU">
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+	
+	
+	
+	
     <strong>Copyright &copy; 2019-2020 <a href="#">SEC.ma</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.3-pre
     </div>
+    
+    

@@ -2,13 +2,9 @@ package com.sec.ma.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -18,27 +14,25 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "client_data")
+@Table(name = "touriste_data")
 @Data @NoArgsConstructor @AllArgsConstructor @ToString 
-public class Client {
+public class Touriste {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotNull(message="Nom is empthy")
-	@Column(name="nom_client")
+	@Column(name="nom_touriste")
 	private String nom;
 	@NotNull(message="Email is empthy")
-	@Column(name="email_client")
+	@Column(name="email_touriste")
 	private String email;
 	@NotNull(message="Tele is empthy")
-	@Column(name="tele_client")
+	@Column(name="tele_touriste")
 	private String tele;
-	@NotNull(message="Fonction is empthy")
-	@Column(name="fonction_client")
-	private String fonction;
-	@OneToOne(fetch = FetchType.EAGER)
-	private Entreprise entreprise; 
-	
-	
-	
+	@NotNull(message="Ville is empthy")
+	@Column(name="ville_touriste")
+	private String Ville;
+	@NotNull(message="Country is empthy")
+	@Column(name="country_touriste")
+	private String country;
 }
