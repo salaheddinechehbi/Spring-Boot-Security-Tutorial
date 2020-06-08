@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Sport-Travel | Entreprises</title>
+<title>Sport-Travel | Touristes</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -46,12 +46,12 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1>Entreprises</h1>
+							<h1>Touristes</h1>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Entreprises</li>
+								<li class="breadcrumb-item active">Touristes</li>
 							</ol>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 						<!-- jquery validation -->
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Gestion Entreprise</h3>
+								<h3 class="card-title">Gestion Touriste</h3>
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
@@ -89,36 +89,36 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Entreprise DataTable</h3>
+								<h3 class="card-title">Touriste DataTable</h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<table id="example2" class="table table-striped">
 									<thead>
 										<tr>
-											<th>Libelle</th>
+											<th>Nom</th>
 											<th>Email</th>
 											<th>Tele</th>
-											<th>Adresse</th>
 											<th>Ville</th>
+											<th>Country</th>
 											<th>Modification</th>
 										</tr>
 									</thead>
 									<tbody>
 
-										<tr th:each="entr : ${listEntr}">
-											<td th:text="${entr.libelle}"></td>
-											<td th:text="${entr.email}"></td>
-											<td th:text="${entr.tele}"></td>
-											<td th:text="${entr.adresse}"></td>
-											<td th:text="${entr.ville}"></td>
+										<tr th:each="tour : ${listTour}">
+											<td th:text="${tour.nom}"></td>
+											<td th:text="${tour.email}"></td>
+											<td th:text="${tour.tele}"></td>
+											<td th:text="${tour.ville}"></td>
+											<td th:text="${tour.Country}"></td>
 											<td><a href="#" type="button" data-toggle="modal"
 												data-target="#update-modal" class="btn btn-info btn-sm"
-												id="editEntr"><i class="fas fa-pencil-alt"> </i>Modifier</a>
+												id="editTour"><i class="fas fa-pencil-alt"> </i>Modifier</a>
 												<a href="#" type="button" data-toggle="modal"
 												data-target="#delete-modal" class="btn btn-danger btn-sm"
-												id="deleteEntr"><i class="fas fa-trash"> </i>Supprimer</a> <input
-												type="hidden" id="idEntr" th:value="${entr.id}"></td>
+												id="deleteTour"><i class="fas fa-trash"> </i>Supprimer</a> 
+												<input type="hidden" id="idTour" th:value="${tour.id}"></td>
 										</tr>
 
 									</tbody>
@@ -142,10 +142,10 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/entrDetails}" th:object="${entreprise}"
+						th:action="@{/tourDetails}" th:object="${touriste}"
 						method="post" class="form-signin" role="form">
 						<div class="modal-header">
-							<h4 class="modal-title">Gestion Entreprise</h4>
+							<h4 class="modal-title">Gestion Touriste</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								id="closeMod" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -157,10 +157,8 @@
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="exampleInputlibelle1">Nom</label> <input
-												type="text" th:field="*{libelle}" name="libelle"
-												class="form-control" id="exampleInputLibelle1"
-												placeholder="Enter Libelle">
+											<label for="exampleInputNom1">Nom</label> 
+											<input type="text" th:field="*{nom}" name="nom" class="form-control" id="exampleInputNom1" placeholder="Enter Nom">
 										</div>
 									</div>
 
@@ -184,15 +182,7 @@
 								</div>
 								<div class="row">
 
-									<div class="col-sm-8">
-										<div class="form-group">
-											<label for="exampleInputAdresse1">Adresse</label> <input
-												type="text" th:field="*{adresse}" name="adresse"
-												class="form-control" id="exampleInputAdresse1"
-												placeholder="Enter Adresse">
-										</div>
-									</div>
-
+									
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputVille1">Ville</label> <input
@@ -201,6 +191,16 @@
 												placeholder="Enter Ville">
 										</div>
 									</div>
+									
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="exampleInputCountry1">Country</label> <input
+												type="text" th:field="*{country}" name="country"
+												class="form-control" id="exampleInputCountry1"
+												placeholder="Enter Country">
+										</div>
+									</div>
+									
 
 								</div>
 							</div>
@@ -209,7 +209,7 @@
 						<div class="modal-footer justify-content-between">
 							<button id="closeMod" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
-							<button type="submit" id="addEntr" class="btn btn-success">Ajouter</button>
+							<button type="submit" id="addTour" class="btn btn-success">Ajouter</button>
 						</div>
 					</form>
 				</div>
@@ -223,10 +223,10 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/entrDetails/update}" method="post"
+						th:action="@{/tourDetails/update}" method="post"
 						class="form-signin" role="form">
 						<div class="modal-header">
-							<h4 class="modal-title">Gestion Entreprise</h4>
+							<h4 class="modal-title">Gestion Touriste</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								id="closeMod" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -238,9 +238,9 @@
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="updateLibelle2">Nom</label> <input type="text"
-												name="libelle" class="form-control" id="updateLibelle2"
-												placeholder="Enter Libelle">
+											<label for="updateNom2">Nom</label> <input type="text"
+												name="nom" class="form-control" id="updateNom2"
+												placeholder="Enter Nom">
 										</div>
 									</div>
 
@@ -263,19 +263,19 @@
 								</div>
 								<div class="row">
 
-									<div class="col-sm-8">
-										<div class="form-group">
-											<label for="updateAdresse2">Adresse</label> <input
-												type="text" name="adresse" class="form-control"
-												id="updateAdresse2" placeholder="Enter Adresse">
-										</div>
-									</div>
-
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="updateVille1">Ville</label> <input type="text"
 												name="ville" class="form-control" id="updateVille2"
 												placeholder="Enter Ville">
+										</div>
+									</div>
+									
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label for="updateCountry2">Country</label> <input
+												type="text" name="country" class="form-control"
+												id="updateCountry2" placeholder="Enter Country">
 										</div>
 									</div>
 
@@ -286,8 +286,8 @@
 						<div class="modal-footer justify-content-between">
 							<button id="closeMod" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
-							<input type="hidden" name="idE" id="idE">
-							<button type="submit" id="updateEntr" class="btn btn-info">Modifier</button>
+							<input type="hidden" name="idT" id="idT">
+							<button type="submit" id="updateTour" class="btn btn-info">Modifier</button>
 						</div>
 					</form>
 				</div>
@@ -301,7 +301,7 @@
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<form autocomplete="off" action="#"
-						th:action="@{/entrDetails/delete}" method="post"
+						th:action="@{/tourDetails/delete}" method="post"
 						class="form-signin" role="form">
 						<div class="modal-header">
 							<h5 class="modal-title">Confirm Delete Request !!</h5>
@@ -314,7 +314,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Fermer</button>
 							<button type="submit" class="btn btn-danger">Delete</button>
-							<input type="hidden" name="idE" id="idE">
+							<input type="hidden" name="idT" id="idT">
 						</div>
 					</form>
 				</div>
@@ -357,7 +357,7 @@
 	<script src="js/demo.js"></script>
 
 	<!-- page script -->
-	<script src="scripts/entrScript.js"></script>
+	<script src="scripts/touristeScript.js"></script>
 	<script th:inline="javascript">
 	
 	    var flag = [[${successMessage}]]; //Your Thymleaf variable
