@@ -35,7 +35,26 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Gestion Des C/E
+                Les Services
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="clientDetails" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Clients-Details</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Les Gestions
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -73,6 +92,7 @@
               
             </ul>
           </li>
+          
           <!-- th:if="${#request.isUserInRole('ADMIN')}" -->
           <li sec:authorize="hasRole('ADMIN')" class="nav-item has-treeview">
             <a href="#" class="nav-link">
