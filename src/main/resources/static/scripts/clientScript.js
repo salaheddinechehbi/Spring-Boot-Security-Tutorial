@@ -25,13 +25,13 @@ $(document).ready(function () {
 	        required: true,
 	        email: true,
 	      },
-	      libelle: {
+	      nom: {
 	          required: true,
 	        },
-	      ville: {
+	      entreprise: {
 	          required: true,
 	        },
-	      adresse: {
+	      fonction: {
 	          required: true,
 	        },
 	        tele: {
@@ -43,14 +43,14 @@ $(document).ready(function () {
 	        required: "Please enter a email address",
 	        email: "Please enter a vaild email address"
 	      },
-	      libelle: {
-	        required: "Please provide a libelle",
+	      nom: {
+	        required: "Please provide a name",
 	      },
-	      ville: {
-	          required: "Please provide a ville",
+	      fonction: {
+	          required: "Please provide a fonction",
 	        },
-	      adresse: {
-	          required: "Please provide a adresse",
+	      entreprise: {
+	          required: "Please provide a entreprise",
 	        },
 	        tele: {
 	            required: "Please provide a tele",
@@ -71,17 +71,17 @@ $(document).ready(function () {
 	  
 	  
 	  
-	  $(document).on('click','#editEntr',function(){
-		    let id = $(this).parent().find('#idEntr').val();
+	  $(document).on('click','#editClient',function(){
+		    let id = $(this).parent().find('#idClient').val();
 		    let tr = $(this).closest('tr');
-		    $("#updateLibelle2").val($(tr).find('td').eq(0).text());
+		    $("#updateNom2").val($(tr).find('td').eq(0).text());
 		    $("#updateEmail2").val($(tr).find('td').eq(1).text());
 		    $("#updateTele2").val($(tr).find('td').eq(2).text());
-		    $("#updateAdresse2").val($(tr).find('td').eq(3).text());
-		    $("#updateVille2").val($(tr).find('td').eq(4).text());
-		    $('#example2 #idEntr').val(id);
-		    $('#update-modal #idE').val(id);
-		  	console.log("ttttttttttttttt "+$('#update-modal #idE').val());
+		    $("#updateFonction2").val($(tr).find('td').eq(3).text());
+		    $("#updateEntreprise2").val($(tr).find('td').eq(4).text());
+		    $('#example2 #idClient').val(id);
+		    $('#update-modal #idCl').val(id);
+		  	console.log("ttttttttttttttt "+$('#update-modal #idCl').val());
 		 });
 	  
 	  //$(document).on('click','#updateEntr',function(){
@@ -90,17 +90,17 @@ $(document).ready(function () {
 		  //	console.log("kjlllllll " + $('#update-modal #idE').val());
 		 //});
 	  
-	  $(document).on('click','#deleteEntr',function(){
-		  	let id = $(this).parent().find('#idEntr').val();
-		  	$('#delete-modal #idE').val(id);
+	  $(document).on('click','#deleteClient',function(){
+		  	let id = $(this).parent().find('#idClient').val();
+		  	$('#delete-modal #idCl').val(id);
 		 });
 
 		$(document).on('click','#closeMod',function(){
-		    $("#exampleInputLibelle1").val("");
+		    $("#exampleInputNom1").val("");
 		    $("#exampleInputEmail1").val("");
 		    $("#exampleInputTele1").val("");
-		    $("#exampleInputAdresse1").val("");
-		    $("#exampleInputVille1").val("");
+		    $("#exampleInputFonction1").val("");
+		    $("#exampleInputEntreprise1").val("");
 		 });
 	  
 	  

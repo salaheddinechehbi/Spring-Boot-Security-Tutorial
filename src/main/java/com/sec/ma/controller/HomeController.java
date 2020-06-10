@@ -1,7 +1,6 @@
 package com.sec.ma.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,16 +54,11 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("countUser", userService.countUser());
 		modelAndView.addObject("countEntr", entrepriseService.countEntr());
+		modelAndView.addObject("countTour", touristeService.countTouriste());
 		modelAndView.setViewName("index");
 		return modelAndView;
     }
 	
-	@GetMapping("/clientDetails")
-	public ModelAndView client() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("clientDetails");
-		return modelAndView;
-	}
 	
 	@GetMapping("/access-denied")
 	public ModelAndView accessDenied() {

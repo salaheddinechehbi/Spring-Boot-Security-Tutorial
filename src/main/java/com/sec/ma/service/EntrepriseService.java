@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sec.ma.entities.Categorie;
 import com.sec.ma.entities.Entreprise;
 import com.sec.ma.repository.EntrepriseRepository;
 
@@ -34,6 +35,12 @@ public class EntrepriseService {
 	public int countEntr() {
 		
 		return entrepriseRepository.countEntr();
+	}
+	
+	
+	public Entreprise findById(int id) {
+		
+		return entrepriseRepository.findById(id).get();
 	}
 
 }
