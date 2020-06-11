@@ -41,6 +41,11 @@ public class Contrat {
 	@OneToOne(fetch = FetchType.EAGER)
 	private Entreprise entreprise;
 	@OneToOne(fetch = FetchType.EAGER)
+	private Client client;
+	@OneToOne(fetch = FetchType.EAGER)
 	private User user;
+	@NotNull(message="Description is empthy")
+	@Column(name="desc_contrat",length=10000)
+	private String desc;
 	
 }

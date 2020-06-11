@@ -40,23 +40,36 @@ public class ContratController {
 		modelAndView.addObject("contrat", new Contrat());
 		modelAndView.addObject("listEntr", entrepriseService.findAll());
 		modelAndView.addObject("listCont", contratService.findAll());
+		modelAndView.addObject("listUser", userService.findAll());
 		modelAndView.setViewName("contratDetails");
 		return modelAndView;
 	}
 	
 	@PostMapping
-	public ModelAndView addContrat(@Valid Contrat contrat, BindingResult bindingResult) {
+	public ModelAndView addContrat( HttpServletRequest request,BindingResult bindingResult) throws ParseException {
 		ModelAndView modelAndView = new ModelAndView();
 		// Check for the validations
 		if(bindingResult.hasErrors()) {
 			modelAndView.addObject("successMessage", "Please correct the errors in form!");
 		}else {
+			Contrat contrat = new Contrat();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateSigne = format.parse(request.getParameter("dateSigne"));
+            Date dateDebut = format.parse(request.getParameter("dateDebut"));
+            Date dateFin = format.parse(request.getParameter("dateFin"));
+			contrat.setDateSigne(dateSigne);;
+			contrat.setDateDebut(dateDebut);;
+			contrat.setDateFin(dateFin);
+			contrat.setEntreprise(entrepriseService.findById(Integer.parseInt(request.getParameter("idE"))));
+			contrat.setUser(userService.findById(Integer.parseInt(request.getParameter("idU"))));
+		    
 			contratService.save(contrat);
 			modelAndView.addObject("successMessage", "Ajouter");
 		}
 		modelAndView.addObject("contrat", new Contrat());
 		modelAndView.addObject("listEntr", entrepriseService.findAll());
 		modelAndView.addObject("listCont", contratService.findAll());
+		modelAndView.addObject("listUser", userService.findAll());
 		modelAndView.setViewName("contratDetails");
 		
 		return modelAndView;
@@ -106,10 +119,13 @@ public class ContratController {
 	
 	
 	
+	//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	//User customUser = (User)authentication.getPrincipal();
+	//int userId = customUser.getId();
 	
 	
-	
-	
+	//(Principal principal) { return principal.getName();
+	//(Authentication authentication) {  return authentication.getName();
 	
 	
 	

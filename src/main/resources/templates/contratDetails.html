@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Sport-Travel | Entreprises</title>
+<title>Sport-Travel | Contrat</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -141,9 +141,7 @@
 		<div class="modal fade" id="add-modal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/contratDetails}" th:object="${contrat}"
-						method="post" class="form-signin" role="form">
+					<form autocomplete="off" id="quickForm" action="#" th:action="@{/contratDetails}" method="post" class="form-signin" role="form">
 						<div class="modal-header">
 							<h4 class="modal-title">Gestion Contrat</h4>
 							<button type="button" class="close" data-dismiss="modal"
@@ -152,63 +150,72 @@
 							</button>
 						</div>
 						<div class="modal-body">
+							<div class="modal-body">
 							<div class="card-body">
 								<div class="row">
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="exampleInputlibelle1">Nom</label> <input
-												type="text" th:field="*{dateSigne}" name="dateSigne"
-												class="form-control" id="exampleInputLibelle1"
-												placeholder="Enter Libelle">
+											<label for="exampleInputDateS1">Date Signe</label> <input
+												type="date" name="dateSigne"
+												class="form-control" id="exampleInputDateS1">
 										</div>
 									</div>
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="exampleInputEmail1">Email</label> <input
-												type="Email" th:field="*{dateDebut}" name="dateDebut"
-												class="form-control" id="exampleInputEmail1"
-												placeholder="Enter email">
+											<label for="exampleInputDateD1">Date Debut</label> <input
+												type="date" name="dateDebut"
+												class="form-control" id="exampleInputDateD1">
 										</div>
 									</div>
-
+									
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="exampleInputTele1">Tele</label> <input type="tel"
-												th:field="*{dateFin}" name="dateFin" class="form-control"
-												id="exampleInputTele1" placeholder="Enter Telephone">
+											<label for="exampleInputDateF1">Date Fin</label> 
+											<input type="date" name="dateFin" class="form-control" id="exampleInputDateF1">
 										</div>
 									</div>
 
 								</div>
 								<div class="row">
 
-									<div class="col-sm-8">
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="exampleInputAdresse1">Adresse</label> <input
-												type="text" th:field="*{entreprise}" name="entreprise"
-												class="form-control" id="exampleInputAdresse1"
-												placeholder="Enter Adresse">
+											<label for="exampleInputEntr1">Entreprise</label> 
+											<select name="entreprise" id="exampleInputEntr1" class="form-control select2" style="width: 100%;">
+												<option selected="selected"> Choisir Entreprise</option>
+												<option th:each="entr : ${listEntr}" th:value="${entr.id}" th:text="${entr.libelle}"> selected="selected"></option>
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="exampleInputClient1">Entreprise</label> 
+											<select name="client" id="exampleInputClient1" class="form-control select2" style="width: 100%;">
+												<option selected="selected"> Choisir Client</option>
+											</select>
 										</div>
 									</div>
 
-									<div class="col-sm-4">
+								</div>
+								<div class="row">
+
+									<div class="col-sm-12">
 										<div class="form-group">
-											<label for="exampleInputVille1">Ville</label> <input
-												type="text" th:field="*{user}" name="user"
-												class="form-control" id="exampleInputVille1"
-												placeholder="Enter Ville">
+											<label for="exampleInputDesc1">Description</label> 
+											<textarea class="col-sm-12"></textarea>
 										</div>
 									</div>
 
 								</div>
 							</div>
+							</div>
 							<!-- /.card-body -->
 						</div>
 						<div class="modal-footer justify-content-between">
-							<button id="closeMod" class="btn btn-default"
-								data-dismiss="modal">Fermer</button>
+							<button id="closeMod" class="btn btn-default" data-dismiss="modal">Fermer</button>
 							<button type="submit" id="addContrat" class="btn btn-success">Ajouter</button>
 						</div>
 					</form>
@@ -233,53 +240,67 @@
 							</button>
 						</div>
 						<div class="modal-body">
+							<div class="modal-body">
 							<div class="card-body">
 								<div class="row">
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="updateLibelle2">Nom</label> <input type="text"
-												name="dateSigne" class="form-control" id="updateLibelle2"
-												placeholder="Enter Libelle">
+											<label for="exampleInputDateS1">Date Signe</label> <input
+												type="date" name="dateSigne"
+												class="form-control" id="updateDateS1">
 										</div>
 									</div>
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="updateEmail1">Email</label> <input type="Email"
-												name="dateDebut" class="form-control" id="updateEmail2"
-												placeholder="Enter email">
+											<label for="exampleInputDateD1">Date Debut</label> <input
+												type="date" name="dateDebut"
+												class="form-control" id="updateDateD1">
 										</div>
 									</div>
-
+									
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="updateTele2">Tele</label> <input type="tel"
-												name="dateFin" class="form-control" id="updateTele2"
-												placeholder="Enter Telephone">
+											<label for="exampleInputDateF1">Date Fin</label> 
+											<input type="date" name="dateFin" class="form-control" id="updateDateF1">
 										</div>
 									</div>
 
 								</div>
 								<div class="row">
 
-									<div class="col-sm-8">
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="updateAdresse2">Adresse</label> <input
-												type="text" name="idE" class="form-control"
-												id="updateAdresse2" placeholder="Enter Adresse">
+											<label for="exampleInputEntr1">Entreprise</label> 
+											<select name="entreprise" id="updateEntr1" class="form-control select2" style="width: 100%;">
+												<option selected="selected"> Choisir Entreprise</option>
+												<option th:each="entr : ${listEntr}" th:value="${entr.id}" th:text="${entr.libelle}"></option>
+											</select>
 										</div>
 									</div>
-
-									<div class="col-sm-4">
+									
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="updateVille1">Ville</label> <input type="text"
-												name="idU" class="form-control" id="updateVille2"
-												placeholder="Enter Ville">
+											<label for="exampleInputClient1">Entreprise</label> 
+											<select name="client" id="updateClient1" class="form-control select2" style="width: 100%;">
+												<option selected="selected"> Choisir Client</option>
+											</select>
 										</div>
 									</div>
 
 								</div>
+								<div class="row">
+
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label for="exampleInputDesc1">Description</label> 
+											<textarea class="col-sm-12"></textarea>
+										</div>
+									</div>
+
+								</div>
+							</div>
 							</div>
 							<!-- /.card-body -->
 						</div>

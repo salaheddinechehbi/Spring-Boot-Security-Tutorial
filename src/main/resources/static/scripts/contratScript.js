@@ -71,38 +71,29 @@ $(document).ready(function () {
 	  
 	  
 	  
-	  $(document).on('click','#editEntr',function(){
+	  $(document).on('click','#editContrat',function(){
 		    let id = $(this).parent().find('#idEntr').val();
 		    let tr = $(this).closest('tr');
-		    $("#updateLibelle2").val($(tr).find('td').eq(0).text());
-		    $("#updateEmail2").val($(tr).find('td').eq(1).text());
-		    $("#updateTele2").val($(tr).find('td').eq(2).text());
-		    $("#updateAdresse2").val($(tr).find('td').eq(3).text());
-		    $("#updateVille2").val($(tr).find('td').eq(4).text());
-		    $('#example2 #idEntr').val(id);
-		    $('#update-modal #idE').val(id);
-		  	console.log("ttttttttttttttt "+$('#update-modal #idE').val());
+		    $("#updateDateS2").val($(tr).find('td').eq(0).text());
+		    $("#updateDateD2").val($(tr).find('td').eq(1).text());
+		    $("#updateDateF2").val($(tr).find('td').eq(2).text());
+		    $('#example2 #idContrat').val(id);
+		    $('#update-modal #idCt').val(id);
+		  	console.log("ttttttttttttttt "+$('#update-modal #idCt').val());
 		 });
 	  
-	  //$(document).on('click','#updateEntr',function(){
-		  	
-		//  	$('#update-modal #idE').val($('#idEntr').val());
-		  //	console.log("kjlllllll " + $('#update-modal #idE').val());
-		 //});
-	  
-	  $(document).on('click','#deleteEntr',function(){
-		  	let id = $(this).parent().find('#idEntr').val();
-		  	$('#delete-modal #idE').val(id);
+	  $(document).on('click','#deleteContrat',function(){
+		  	let id = $(this).parent().find('#idContrat').val();
+		  	$('#delete-modal #idCt').val(id);
 		 });
 
-		$(document).on('click','#closeMod',function(){
-		    $("#exampleInputLibelle1").val("");
-		    $("#exampleInputEmail1").val("");
-		    $("#exampleInputTele1").val("");
-		    $("#exampleInputAdresse1").val("");
-		    $("#exampleInputVille1").val("");
-		 });
+	  $(document).on('click','#closeMod',function(){
+		    $("#exampleInputDesc1").val("");
+	  });
 	  
+	  $(document).on('change','#exampleInputEntr1',function(){
+		    console.log($(this).val())
+	  });
 	  
 });
 

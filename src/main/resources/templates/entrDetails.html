@@ -206,10 +206,10 @@
 									
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="exampleInputCat1">Etat Compte</label> <select
-												th:field="*{categorie}" name="categorie" id="exampleInputCat1"
-												class="form-control select2" style="width: 100%;">
-												<option th:each="cat : ${listCat}" th:value="${cat.id}" th:text="${cat.libelle}"> selected="selected"></option>
+											<label for="exampleInputCat1">Etat Compte</label> 
+											<select th:field="*{categorie}" name="categorie" id="exampleInputCat1" class="form-control select2" style="width: 100%;">
+												<option selected="selected"> Choisir Categorie</option>
+												<option th:each="cat : ${listCat}" th:value="${cat.id}" th:text="${cat.libelle}"></option>
 											</select>
 										</div>
 									</div>
