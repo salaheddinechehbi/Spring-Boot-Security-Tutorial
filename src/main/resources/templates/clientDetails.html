@@ -18,6 +18,14 @@
   <link rel="stylesheet" href="css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+  		.underLine {
+				/* This is a single-line comment */
+			/* border-bottom: 1px solid black;
+			padding-bottom: 5px; */
+			text-decoration:underline;
+		}
+	</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -88,7 +96,7 @@
 											<th>Email</th>
 											<th>Tele</th>
 											<th>Fonction</th>
-											<th>Entrprise</th>
+											<th>Entreprise</th>
 											<th>Modification</th>
 										</tr>
 									</thead>
@@ -99,14 +107,19 @@
 											<td th:text="${cl.email}"></td>
 											<td th:text="${cl.tele}"></td>
 											<td th:text="${cl.fonction}"></td>
-											<td th:text="${cl.entreprise.libelle}"></td>
-											<td><a href="#" type="button" data-toggle="modal"
-												data-target="#update-modal" class="btn btn-info btn-sm"
-												id="editClient"><i class="fas fa-pencil-alt"> </i>Modifier</a>
-												<a href="#" type="button" data-toggle="modal"
-												data-target="#delete-modal" class="btn btn-danger btn-sm"
-												id="deleteClient"><i class="fas fa-trash"> </i>Supprimer</a> 
-												<input type="hidden" id="idClient" th:value="${cl.id}"></td>
+											<td>
+												<a class="underLine" id="entrDetails" th:text="${cl.entreprise.libelle}" href=""  data-toggle="modal" data-target="#entreprise-modal"></a>
+												<input type="hidden" id="idE" th:value="${cl.entreprise.id}">
+											</td>
+											<td>
+												<a href="#" type="button" data-toggle="modal" data-target="#update-modal" class="btn btn-info btn-sm" id="editClient">
+													<i class="fas fa-pencil-alt"></i>Modifier
+												</a>
+												<a href="#" type="button" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger btn-sm" id="deleteClient">
+													<i class="fas fa-trash"> </i>Supprimer
+												</a> 
+												<input type="hidden" id="idClient" th:value="${cl.id}">
+											</td>
 										</tr>
 
 									</tbody>
@@ -314,6 +327,83 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+		
+		
+		<div class="modal fade" id="entreprise-modal">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Details D'Entreprise !!</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+							
+				                <div class="col-12 col-sm-6">
+				                  <div class="info-box bg-light">
+				                    <div class="info-box-content">
+				                      <span class="info-box-text text-center text-muted">Libelle</span>
+				                      <span class="info-box-number text-center text-muted mb-0" id="libelleE"></span>
+				                    </div>
+				                  </div>
+				                </div>
+				                
+				                <div class="col-12 col-sm-6">
+				                  <div class="info-box bg-light">
+				                    <div class="info-box-content">
+				                      <span class="info-box-text text-center text-muted">Tele</span>
+				                      <span class="info-box-number text-center text-muted mb-0" id="teleE"></span>
+				                    </div>
+				                  </div>
+				                </div>
+				                
+				            </div>
+				            <div class="row">
+				            
+				                <div class="col-12 col-sm-6">
+				                  <div class="info-box bg-light">
+				                    <div class="info-box-content">
+				                      <span class="info-box-text text-center text-muted">Email</span>
+				                      <span class="info-box-number text-center text-muted mb-0" id="emailE"> <span>
+				                    </span></span></div>
+				                  </div>
+				                </div>
+				                
+				                <div class="col-12 col-sm-6">
+				                  <div class="info-box bg-light">
+				                    <div class="info-box-content">
+				                      <span class="info-box-text text-center text-muted">Ville</span>
+				                      <span class="info-box-number text-center text-muted mb-0" id="villeE"> <span>
+				                    </span></span></div>
+				                  </div>
+				                </div>
+				                
+				            </div>
+				            <div class="row">
+				            
+				                <div class="col-12 col-sm-12">
+				                  <div class="info-box bg-light">
+				                    <div class="info-box-content">
+				                      <span class="info-box-text text-center text-muted">Adresse</span>
+				                      <span class="info-box-number text-center text-muted mb-0" id="adresseE"> <span>
+				                    </span></span></div>
+				                  </div>
+				                </div>
+				                
+				            </div>
+						</div>
+						<div class="modal-footer justify-content-between">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Fermer</button>
+						</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
 
 		<footer th:insert="footer.html" class="main-footer"></footer>
 
@@ -367,17 +457,17 @@
 	       		if(flag ==="Ajouter"){
 	       			Toast.fire({
 			            type: 'success',
-			            title: 'Entreprise Bien Ajouter'
+			            title: 'Client Bien Ajouter'
 			         });
 	       		}else if(flag ==="Modifier"){
 	       			Toast.fire({
 			            type: 'success',
-			            title: 'Entreprise Bien Modifier'
+			            title: 'Client Bien Modifier'
 			         });
 	       		}else if(flag === "Supprimer"){
 	       			Toast.fire({
 			            type: 'success',
-			            title: 'Entreprise Bien Supprimer'
+			            title: 'Client Bien Supprimer'
 			         });
 	       		}else{
 	       			Toast.fire({

@@ -84,11 +84,32 @@ $(document).ready(function () {
 		  	console.log("ttttttttttttttt "+$('#update-modal #idCl').val());
 		 });
 	  
-	  //$(document).on('click','#updateEntr',function(){
-		  	
-		//  	$('#update-modal #idE').val($('#idEntr').val());
-		  //	console.log("kjlllllll " + $('#update-modal #idE').val());
-		 //});
+	  $(document).on('click','#entrDetails',function(){
+		    let idE = $(this).parent().find('#idE').val();
+		    //var idE = $(this).closest('tr').find('#idE').val();
+		  	//console.log("ttttttttttttttt "+idE);
+		  	$.ajax({
+		        //url: "entrDetails/findById?idE="+idE,
+		        url: "entrDetails/findById",
+		        type: 'POST',
+		        cache: false,
+		        dataType: 'json',
+		        data:{idE:idE},
+		        success: function (data, textStatus, jqXHR) {
+		            //console.log(data);
+		        	$("#teleE").text(data.tele);
+		        	$("#libelleE").text(data.libelle);
+		        	$("#emailE").text(data.email);
+		        	$("#villeE").text(data.ville);
+		        	$("#adresseE").text(data.adresse);
+		        },
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.log(textStatus);
+		        }
+		    });
+		 });
+	  
+	  
 	  
 	  $(document).on('click','#deleteClient',function(){
 		  	let id = $(this).parent().find('#idClient').val();

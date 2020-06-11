@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -84,6 +85,35 @@ public class EntrepriseController {
 		redir.addFlashAttribute("successMessage", "Supprimer");
 		return modelAndView;
 	}
+	
+	
+	@PostMapping(value = "/findById", produces = "application/json")
+	public Entreprise findById(@RequestParam  String idE) {
+		//(required = false)
+		//(defaultValue = "test")
+		int id = Integer.parseInt(idE);
+		return entrepriseService.findById(id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping(value = "/findById", produces = "application/json")
+	public Entreprise findById2(@RequestParam  String idE) {
+		//(required = false)
+		//(defaultValue = "test")
+		int id = Integer.parseInt(idE);
+		return entrepriseService.findById(id);
+	}
+	
+	
+	
 	
 	
 }
