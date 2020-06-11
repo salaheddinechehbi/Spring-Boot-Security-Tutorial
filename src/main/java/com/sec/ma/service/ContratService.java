@@ -36,4 +36,7 @@ public class ContratService {
 		return contratRepository.countContrat();
 	}
 
+	public Contrat findById(int id) {
+		return contratRepository.findById(id).get();
+	}
 }

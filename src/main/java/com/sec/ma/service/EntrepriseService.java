@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sec.ma.entities.Categorie;
 import com.sec.ma.entities.Entreprise;
 import com.sec.ma.repository.EntrepriseRepository;
 
