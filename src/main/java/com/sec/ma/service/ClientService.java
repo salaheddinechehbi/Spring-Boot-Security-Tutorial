@@ -35,5 +35,9 @@ public class ClientService {
 		
 		return clientRepository.countClient();
 	}
+	
+	public List<Client> findByEntr(int idE){
+		return clientRepository.clientByEntr(idE);
+	}
 
 }

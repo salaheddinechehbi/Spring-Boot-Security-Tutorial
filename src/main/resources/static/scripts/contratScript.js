@@ -80,20 +80,43 @@ $(document).ready(function () {
 		    $('#example2 #idContrat').val(id);
 		    $('#update-modal #idCt').val(id);
 		  	console.log("ttttttttttttttt "+$('#update-modal #idCt').val());
-		 });
+	  });
 	  
 	  $(document).on('click','#deleteContrat',function(){
 		  	let id = $(this).parent().find('#idContrat').val();
 		  	$('#delete-modal #idCt').val(id);
-		 });
+	  });
 
 	  $(document).on('click','#closeMod',function(){
 		    $("#exampleInputDesc1").val("");
 	  });
 	  
 	  $(document).on('change','#exampleInputEntr1',function(){
-		    console.log($(this).val())
+		    //console.log($(this).val());
+		    //$("#exampleInputClient1").empty();
+		    //$("#exampleInputClient1").append("<optiont value='2'>hello</optiont>");
+		    $.ajax({
+		        //url: "entrDetails/findById?idE="+idE,
+		        url: "clientDetails/findByEntr",
+		        type: 'POST',
+		        cache: false,
+		        dataType: 'json',
+		        data:{idE:$(this).val()},
+		        success: function (data, textStatus, jqXHR) {
+		        	$('#exampleInputClient1 option').remove(); // clear all values 
+		        	$('#exampleInputClient1').append('<option selected disabled>Choisir Client</option>');
+		        	for(var i=0; i<data.length ; i++){
+		        		$('#exampleInputClient1').append('<option value="'+data[i].id+'">'+data[i].nom+'</option>');
+		        	}
+				    
+		            //console.log(data);
+		        },
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.log(textStatus);
+		        }
+		    });
 	  });
-	  
+		    
+		    
 });
 

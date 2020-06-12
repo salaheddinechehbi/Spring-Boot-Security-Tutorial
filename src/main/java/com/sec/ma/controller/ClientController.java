@@ -1,5 +1,7 @@
 package com.sec.ma.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -8,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -82,6 +85,14 @@ public class ClientController {
 		clientService.delete(id);
 		redir.addFlashAttribute("successMessage", "Supprimer");
 		return modelAndView;
+	}
+	
+	@PostMapping(value = "/findByEntr", produces = "application/json")
+	public List<Client> findByEntr(@RequestParam  String idE) {
+		//(required = false)
+		//(defaultValue = "test")
+		int id = Integer.parseInt(idE);
+		return clientService.findByEntr(id);
 	}
 	
 	
