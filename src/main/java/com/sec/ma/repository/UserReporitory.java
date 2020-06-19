@@ -32,4 +32,5 @@ public interface UserReporitory extends JpaRepository<User, Integer>{
 	int countUser();
 	
 	
+	
 }

@@ -39,6 +39,11 @@ public class UserService {
 		return userReporitory.findById(id).get();
 	}
 	
+	public User findByUserName(String uname) {
+		
+		return userReporitory.findByUsername(uname).get();
+	}
+	
 	public void delete(int id) {
 		
 		userReporitory.deleteById(id);

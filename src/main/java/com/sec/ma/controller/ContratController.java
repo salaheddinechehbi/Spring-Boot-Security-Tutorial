@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sec.ma.entities.Entreprise;
 import com.sec.ma.service.EntrepriseService;
 import com.sec.ma.service.UserService;
+import com.sec.ma.config.MyUserDetails;
 import com.sec.ma.entities.Contrat;
+import com.sec.ma.service.ClientService;
 import com.sec.ma.service.ContratService;
 
 @RestController
@@ -33,6 +35,8 @@ public class ContratController {
 	private ContratService contratService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ClientService clientService;
 	
 	@GetMapping
 	public ModelAndView contrat() {
@@ -46,26 +50,29 @@ public class ContratController {
 	}
 	
 	@PostMapping
-	public ModelAndView addContrat( HttpServletRequest request,BindingResult bindingResult) throws ParseException {
+	public ModelAndView addContrat( HttpServletRequest request) throws ParseException {
 		ModelAndView modelAndView = new ModelAndView();
 		// Check for the validations
-		if(bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-		}else {
-			Contrat contrat = new Contrat();
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date dateSigne = format.parse(request.getParameter("dateSigne"));
-            Date dateDebut = format.parse(request.getParameter("dateDebut"));
-            Date dateFin = format.parse(request.getParameter("dateFin"));
-			contrat.setDateSigne(dateSigne);;
-			contrat.setDateDebut(dateDebut);;
-			contrat.setDateFin(dateFin);
-			contrat.setEntreprise(entrepriseService.findById(Integer.parseInt(request.getParameter("idE"))));
-			contrat.setUser(userService.findById(Integer.parseInt(request.getParameter("idU"))));
+		Contrat contrat = new Contrat();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateSigne = format.parse(request.getParameter("dateSigne"));
+        Date dateDebut = format.parse(request.getParameter("dateDebut"));
+        Date dateFin = format.parse(request.getParameter("dateFin"));
+		contrat.setDateSigne(dateSigne);
+		contrat.setDateDebut(dateDebut);
+		contrat.setDateFin(dateFin);
+		contrat.setDesc(request.getParameter("desc"));
+		contrat.setClient(clientService.findById(Integer.parseInt(request.getParameter("client"))));
+		contrat.setEntreprise(entrepriseService.findById(Integer.parseInt(request.getParameter("entreprise"))));
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		MyUserDetails customUser = (MyUserDetails)authentication.getPrincipal();
+		String uname = customUser.getUsername();
+		contrat.setUser(userService.findByUserName(uname));
 		    
-			contratService.save(contrat);
-			modelAndView.addObject("successMessage", "Ajouter");
-		}
+		contratService.save(contrat);
+		modelAndView.addObject("successMessage", "Ajouter");
+			
 		modelAndView.addObject("contrat", new Contrat());
 		modelAndView.addObject("listEntr", entrepriseService.findAll());
 		modelAndView.addObject("listCont", contratService.findAll());
@@ -80,16 +87,25 @@ public class ContratController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/contratDetails");
 		Contrat contrat = new Contrat();
 		try{
+			int idCont = Integer.parseInt(request.getParameter("idCt"));
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date dateSigne = format.parse(request.getParameter("dateSigne"));
-            Date dateDebut = format.parse(request.getParameter("dateDebut"));
-            Date dateFin = format.parse(request.getParameter("dateFin"));
-			contrat.setDateSigne(dateSigne);;
-			contrat.setDateDebut(dateDebut);;
+	        Date dateSigne = format.parse(request.getParameter("dateSigne"));
+	        Date dateDebut = format.parse(request.getParameter("dateDebut"));
+	        Date dateFin = format.parse(request.getParameter("dateFin"));
+			contrat.setDateSigne(dateSigne);
+			contrat.setDateDebut(dateDebut);
 			contrat.setDateFin(dateFin);
-			contrat.setEntreprise(entrepriseService.findById(Integer.parseInt(request.getParameter("idE"))));
-			contrat.setUser(userService.findById(Integer.parseInt(request.getParameter("idU"))));
-		    
+			contrat.setDesc(request.getParameter("desc"));
+			contrat.setClient(clientService.findById(Integer.parseInt(request.getParameter("client"))));
+			contrat.setEntreprise(entrepriseService.findById(Integer.parseInt(request.getParameter("entreprise"))));
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			MyUserDetails customUser = (MyUserDetails)authentication.getPrincipal();
+			String uname = customUser.getUsername();
+			contrat.setUser(userService.findByUserName(uname));
+			   
+			contrat.setId(idCont);
+			
 			contratService.save(contrat);
 			redir.addFlashAttribute("successMessage", "Modifier");
 		} catch(NumberFormatException ex){ // handle your exception
@@ -102,7 +118,7 @@ public class ContratController {
 	@PostMapping("/delete")
 	public ModelAndView deleteContrat(HttpServletRequest request,RedirectAttributes redir) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/contratDetails");
-		int id = Integer.parseInt(request.getParameter("idE"));
+		int id = Integer.parseInt(request.getParameter("idCt"));
 		contratService.delete(id);
 		redir.addFlashAttribute("successMessage", "Supprimer");
 		return modelAndView;

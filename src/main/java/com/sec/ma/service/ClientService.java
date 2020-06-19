@@ -39,5 +39,9 @@ public class ClientService {
 	public List<Client> findByEntr(int idE){
 		return clientRepository.clientByEntr(idE);
 	}
+	
+	public Client findById(int idC){
+		return clientRepository.findById(idC).get();
+	}
 
 }

@@ -72,13 +72,13 @@ $(document).ready(function () {
 	  
 	  
 	  $(document).on('click','#editContrat',function(){
-		    let id = $(this).parent().find('#idEntr').val();
+		    let id = $(this).parent().find('#idContrat').val();
 		    let tr = $(this).closest('tr');
-		    $("#updateDateS2").val($(tr).find('td').eq(0).text());
-		    $("#updateDateD2").val($(tr).find('td').eq(1).text());
-		    $("#updateDateF2").val($(tr).find('td').eq(2).text());
-		    $('#example2 #idContrat').val(id);
-		    $('#update-modal #idCt').val(id);
+		    $("#updateDateS1").val($(tr).find('td').eq(0).text());
+		    $("#updateDateD1").val($(tr).find('td').eq(1).text());
+		    $("#updateDateF1").val($(tr).find('td').eq(2).text());
+		    $("#updateDesc1").val(tr.find('#descC').val());
+		    $('#update-modal #idCt').val($(this).parent().find('#idContrat').val());
 		  	console.log("ttttttttttttttt "+$('#update-modal #idCt').val());
 	  });
 	  
@@ -116,7 +116,64 @@ $(document).ready(function () {
 		        }
 		    });
 	  });
-		    
+		
+	  
+	  $(document).on('change','#updateEntr1',function(){
+		    //console.log($(this).val());
+		    //$("#exampleInputClient1").empty();
+		    //$("#exampleInputClient1").append("<optiont value='2'>hello</optiont>");
+		    $.ajax({
+		        //url: "entrDetails/findById?idE="+idE,
+		        url: "clientDetails/findByEntr",
+		        type: 'POST',
+		        cache: false,
+		        dataType: 'json',
+		        data:{idE:$(this).val()},
+		        success: function (data, textStatus, jqXHR) {
+		        	$('#updateClient1 option').remove(); // clear all values 
+		        	$('#updateClient1').append('<option selected disabled>Choisir Client</option>');
+		        	for(var i=0; i<data.length ; i++){
+		        		$('#updateClient1').append('<option value="'+data[i].id+'">'+data[i].nom+'</option>');
+		        	}
+				    
+		            //console.log(data);
+		        },
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.log(textStatus);
+		        }
+		    });
+	  });
+	  
+	  
+	  $(document).on('click','#entrDetails',function(){
+		    let idE = $(this).parent().find('#idE').val();
+		    //var idE = $(this).closest('tr').find('#idE').val();
+		  	//console.log("ttttttttttttttt "+idE);
+		  	$.ajax({
+		        //url: "entrDetails/findById?idE="+idE,
+		        url: "entrDetails/findById",
+		        type: 'POST',
+		        cache: false,
+		        dataType: 'json',
+		        data:{idE:idE},
+		        success: function (data, textStatus, jqXHR) {
+		            //console.log(data);
+		        	$("#teleE").text(data.tele);
+		        	$("#libelleE").text(data.libelle);
+		        	$("#emailE").text(data.email);
+		        	$("#villeE").text(data.ville);
+		        	$("#adresseE").text(data.adresse);
+		        },
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.log(textStatus);
+		        }
+		    });
+		 });
+		 
+		 $(document).on('click','#contDesc',function(){
+			  	
+			    $("#descrC").text($("#descC").val());
+			 });
 		    
 });
 
