@@ -17,6 +17,11 @@
 	href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet"
 	href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  
+  
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
@@ -106,6 +111,7 @@
 											<td th:text="${cont.dateFin}"></td>
 											<td>
 												<a class="underLine" id="entrDetails" th:text="${cont.entreprise.libelle}" href=""  data-toggle="modal" data-target="#entreprise-modal"></a>
+												<input type="hidden" id="idE" th:value="${cont.entreprise.id}">
 											</td>
 											<td th:text="${cont.client.nom}"></td>
 											<td th:text="${cont.user.nom}"></td>
@@ -133,7 +139,8 @@
 					</div>
 					<!-- /.col -->
 				</div>
-				<!-- /.row -->
+				<!-- /.row -->				
+								
 			</section>
 			<!-- /.content -->
 		</div>
@@ -203,13 +210,27 @@
 								</div>
 								<div class="row">
 
-									<div class="col-sm-12">
+									<!--<div class="col-sm-12">
 										<div class="form-group">
 											<label for="exampleInputDesc1">Description</label> 
 											<textarea name="desc" class="col-sm-12"></textarea>
 										</div>
+									</div>-->
+									<div class="col-sm-12">
+										<div class="form-group">
+										<label for="exampleInputDesc1">Description</label> 
+								          <div class="card card-outline card-info">
+								            <div class="card-body pad">
+								              <div class="mb-3">
+								                <textarea name="desc" class="textareaAdd" placeholder="Place some text here"
+								                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 1px;"></textarea>
+								              </div>
+								            </div>
+								          </div>
+								        </div>
 									</div>
-
+									
+									
 								</div>
 							</div>
 							</div>
@@ -293,11 +314,25 @@
 								</div>
 								<div class="row">
 
-									<div class="col-sm-12">
+									<!-- <div class="col-sm-12">
 										<div class="form-group">
 											<label for="exampleInputDesc1">Description</label> 
 											<textarea class="col-sm-12" name="desc" id="updateDesc1"></textarea>
 										</div>
+									</div>  -->
+									
+									<div class="col-sm-12">
+										<div class="form-group">
+										<label for="exampleInputDesc1">Description</label> 
+								          <div class="card card-outline card-info">
+								            <div class="card-body pad">
+								              <div class="mb-3">
+								                <textarea id="updateDesc1" name="desc" class="textareaUp" placeholder="Place some text here"
+								                          style="width: 100%; height: 200px; font-size: 14px; line-height: 10px; border: 1px solid #dddddd; padding: 1px;"></textarea>
+								              </div>
+								            </div>
+								          </div>
+								        </div>
 									</div>
 
 								</div>
@@ -434,14 +469,18 @@
 						<div class="modal-body">
 				            <div class="row">
 				            
-				                <div class="col-12 col-sm-12">
-				                  <div class="info-box bg-light">
-				                    <div class="info-box-content">
-				                      <span class="info-box-text text-center text-muted">Description</span>
-				                      <span class="info-box-number text-center text-muted mb-0" id="descrC"> <span>
-				                    </span></span></div>
-				                  </div>
-				                </div>
+				            <div class="col-sm-12">
+										<div class="form-group">
+								          <div class="card card-outline card-info">
+								            <div class="card-body pad">
+								              <div class="mb-3">
+								                <div id="descContrat"
+								                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 1px;"></div>
+								              </div>
+								            </div>
+								          </div>
+								        </div>
+									</div>
 				                
 				            </div>
 						</div>
@@ -454,6 +493,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
+		
 		
 		<footer th:insert="footer.html" class="main-footer"></footer>
 
@@ -487,6 +527,19 @@
 	<script src="js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="js/demo.js"></script>
+	<!-- Summernote -->
+	<script src="plugins/summernote/summernote-bs4.min.js"></script>
+	<script>
+	  $(function () {
+	    // Summernote
+	    $('.textareaAdd').summernote();
+	  })
+	  $(function () {
+	    // Summernote
+	    $('.textareaUp').summernote();
+	  })
+	  
+	</script>
 
 	<!-- page script -->
 	<script src="scripts/contratScript.js"></script>

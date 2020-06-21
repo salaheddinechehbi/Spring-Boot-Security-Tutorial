@@ -77,9 +77,27 @@ $(document).ready(function () {
 		    $("#updateDateS1").val($(tr).find('td').eq(0).text());
 		    $("#updateDateD1").val($(tr).find('td').eq(1).text());
 		    $("#updateDateF1").val($(tr).find('td').eq(2).text());
-		    $("#updateDesc1").val(tr.find('#descC').val());
+		    
+		    /* Get the text field */
+		    var copyText = tr.find('#descC');
+		    /* Select the text field */
+		    copyText.select();
+		    //copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+		    /* Copy the text inside the text field */
+		    document.execCommand("copy");
+		    /* Alert the copied text */
+		    $(".textareaUp").summernote('code',copyText.val());
+		    
 		    $('#update-modal #idCt').val($(this).parent().find('#idContrat').val());
-		  	console.log("ttttttttttttttt "+$('#update-modal #idCt').val());
+		    
+		  	//if(window.clipboardData){
+		  		//window.clipboardData.clearData();
+		  		//window.clipboardData.setData("TextC",tr.find('#descC').val());
+		  		//document.getElementById("updateDesc1").text = window.clipboardData.getData("TextC");
+		  		//console.log(window.clipboardData.getData("TextC")+"walo");
+		  	//}
+		    //$("#updateDesc1").html(tr.find('#descC').val());
+		     
 	  });
 	  
 	  $(document).on('click','#deleteContrat',function(){
@@ -92,11 +110,7 @@ $(document).ready(function () {
 	  });
 	  
 	  $(document).on('change','#exampleInputEntr1',function(){
-		    //console.log($(this).val());
-		    //$("#exampleInputClient1").empty();
-		    //$("#exampleInputClient1").append("<optiont value='2'>hello</optiont>");
 		    $.ajax({
-		        //url: "entrDetails/findById?idE="+idE,
 		        url: "clientDetails/findByEntr",
 		        type: 'POST',
 		        cache: false,
@@ -148,7 +162,6 @@ $(document).ready(function () {
 	  $(document).on('click','#entrDetails',function(){
 		    let idE = $(this).parent().find('#idE').val();
 		    //var idE = $(this).closest('tr').find('#idE').val();
-		  	//console.log("ttttttttttttttt "+idE);
 		  	$.ajax({
 		        //url: "entrDetails/findById?idE="+idE,
 		        url: "entrDetails/findById",
@@ -171,8 +184,7 @@ $(document).ready(function () {
 		 });
 		 
 		 $(document).on('click','#contDesc',function(){
-			  	
-			    $("#descrC").text($("#descC").val());
+			  	$("#descContrat").html($(this).parent().find("#descC").val());
 			 });
 		    
 });

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sec.ma.entities.User;
+import com.sec.ma.service.ClientService;
 import com.sec.ma.service.EntrepriseService;
 import com.sec.ma.service.TouristeService;
 import com.sec.ma.service.UserService;
@@ -19,6 +20,8 @@ public class HomeController {
 	private EntrepriseService entrepriseService;
 	@Autowired
 	private TouristeService touristeService;
+	@Autowired
+	private ClientService clientService;
 	
 	
 	@GetMapping("/register")
@@ -44,6 +47,7 @@ public class HomeController {
 		modelAndView.addObject("countUser", userService.countUser());
 		modelAndView.addObject("countEntr", entrepriseService.countEntr());
 		modelAndView.addObject("countTour", touristeService.countTouriste());
+		modelAndView.addObject("countClient", clientService.countClient());
 		
 		modelAndView.setViewName("index");
 		return modelAndView;
@@ -55,6 +59,7 @@ public class HomeController {
 		modelAndView.addObject("countUser", userService.countUser());
 		modelAndView.addObject("countEntr", entrepriseService.countEntr());
 		modelAndView.addObject("countTour", touristeService.countTouriste());
+		modelAndView.addObject("countClient", clientService.countClient());
 		modelAndView.setViewName("index");
 		return modelAndView;
     }
