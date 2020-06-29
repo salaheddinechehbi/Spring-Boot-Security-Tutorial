@@ -45,8 +45,12 @@
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h1>Categorie</h1>
+						<div class="col-sm-3">
+							<h1>Categories</h1>
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-success" data-toggle="modal"
+									data-target="#add-modal">Ajouter</button>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -63,34 +67,8 @@
 			<section class="content">
 					
 				<div class="row">
-					<!-- left column -->
-					<div class="col-md-12">
-						<!-- jquery validation -->
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Gestion Categorie</h3>
-							</div>
-							<!-- /.card-header -->
-							<!-- form start -->
-							<div class="card-body">
-								<button class="btn btn-success" data-toggle="modal"
-									data-target="#add-modal">Ajouter</button>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
-					<!--/.col (left) -->
-					<!-- right column -->
-					<div class="col-md-6"></div>
-					<!--/.col (right) -->
-				</div>
-				<div class="row">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Categorie DataTable</h3>
-							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<table id="example2" class="table table-striped">
@@ -105,10 +83,10 @@
 										<tr th:each="cat : ${listCat}">
 											<td th:text="${cat.libelle}"></td>
 											<td><a href="#" type="button" data-toggle="modal"
-												data-target="#update-modal" class="btn btn-info btn-sm"
+												data-target="#update-modal" class="btn btn-outline-info btn-sm"
 												id="editCat"><i class="fas fa-pencil-alt"> </i>Modifier</a>
 												<a href="#" type="button" data-toggle="modal"
-												data-target="#delete-modal" class="btn btn-danger btn-sm"
+												data-target="#delete-modal" class="btn btn-outline-danger btn-sm"
 												id="deleteCat"><i class="fas fa-trash"> </i>Supprimer</a> <input
 												type="hidden" id="idCat" th:value="${cat.id}"></td>
 										</tr>

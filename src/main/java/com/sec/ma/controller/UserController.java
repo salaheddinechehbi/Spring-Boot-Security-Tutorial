@@ -49,16 +49,18 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ModelAndView registerU(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
+	public ModelAndView registerU(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		// Check for the validations
-		if(bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage", "Please correct the errors in form!");
-			modelMap.addAttribute("bindingResult", bindingResult);
-		}else {
+		
+			User user = new User();
+			user.setActive(Boolean.parseBoolean(request.getParameter("active")));
+			user.setEmail(request.getParameter("email"));
+			user.setTele(request.getParameter("tele"));
+			user.setUsername(request.getParameter("username"));
+			user.setRoles(request.getParameter("role"));
+			user.setNom(request.getParameter("nom"));
 			userService.save(user);
 			modelAndView.addObject("successMessage", "Ajouter");
-		}
 		modelAndView.addObject("user", new User());
 		modelAndView.addObject("listUsers", userService.findAll());
 		modelAndView.setViewName("userDetails");

@@ -46,8 +46,12 @@
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h3>Users</h3>
+						<div class="col-sm-3">
+							<h1>Users</h1>
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-success" data-toggle="modal"
+									data-target="#add-modal">Ajouter</button>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -64,35 +68,8 @@
 			<section class="content">
 
 				<div class="row">
-					<!-- left column -->
-					<div class="col-md-12">
-						<!-- jquery validation -->
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Gestion User</h3>
-							</div>
-							<!-- /.card-header -->
-							<!-- form start -->
-							<div class="card-body">
-								<button class="btn btn-success" data-toggle="modal"
-									data-target="#add-modal">Ajouter</button>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
-					<!--/.col (left) -->
-					<!-- right column -->
-					<div class="col-md-6"></div>
-					<!--/.col (right) -->
-				</div>
-				<div class="row">
 					<div class="col-12">
 						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Users DataTable</h3>
-							</div>
-							<!-- /.card-header -->
 							<div class="card-body">
 								<table id="example2" class="table table-striped">
 									<thead>
@@ -116,10 +93,10 @@
 											<td th:text="${us.roles}"></td>
 											<td th:text="${us.active} ? 'Active' : 'Non-Ative' "></td>
 											<td><a href="#" type="button" data-toggle="modal"
-												data-target="#update-modal" class="btn btn-info btn-sm"
+												data-target="#update-modal" class="btn btn-outline-info btn-sm"
 												id="editUser"><i class="fas fa-pencil-alt"> </i>Modifier</a>
 												<a href="#" type="button" data-toggle="modal"
-												data-target="#delete-modal" class="btn btn-danger btn-sm"
+												data-target="#delete-modal" class="btn btn-outline-danger btn-sm"
 												id="deleteUser"><i class="fas fa-trash"> </i>Supprimer</a> <input
 												type="hidden" id="idUser" th:value="${us.id}"></td>
 										</tr>
@@ -144,7 +121,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
-						th:action="@{/userDetails}" th:object="${user}" method="post"
+						th:action="@{/userDetails}" method="post"
 						class="form-signin" role="form">
 						<div class="modal-header">
 							<h4 class="modal-title">Gestion User</h4>
@@ -161,7 +138,7 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputNom1">Nom</label> <input type="text"
-												th:field="*{nom}" name="nom" class="form-control"
+												 name="nom" class="form-control"
 												id="exampleInputNom1" placeholder="Enter Nom">
 										</div>
 									</div>
@@ -169,7 +146,7 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputEmail1">Email Address</label> <input
-												type="Email" th:field="*{email}" name="email"
+												type="Email" name="email"
 												class="form-control" id="exampleInputEmail1"
 												placeholder="Enter email">
 										</div>
@@ -178,7 +155,7 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputLogin1">Login</label> <input
-												type="text" th:field="*{username}" name="username"
+												type="text" name="username"
 												class="form-control" id="exampleInputLogin1"
 												placeholder="Enter Login">
 										</div>
@@ -190,7 +167,7 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputTele1">Tele</label> <input type="tel"
-												th:field="*{tele}" name="tele" class="form-control"
+												 name="tele" class="form-control"
 												id="exampleInputTele1" placeholder="Telephone">
 										</div>
 									</div>
@@ -198,10 +175,12 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputRole1">Role</label> <select
-												th:field="*{roles}" name="role" id="exampleInputRole1"
+												 name="role" id="exampleInputRole1"
 												class="form-control select2" style="width: 100%;">
-												<option value="ROLE_ADMIN">ADMIN</option>
+												<option value="ROLE_ADMIN" >ADMIN</option>
 												<option value="ROLE_USER" selected="selected">USER</option>
+												<option value="ROLE_SECR" >SECRETAIRE</option>
+												<option value="ROLE_RH" >RH</option>
 											</select>
 										</div>
 									</div>
@@ -209,7 +188,7 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label for="exampleInputActive1">Etat Compte</label> <select
-												th:field="*{active}" name="active" id="exampleInputActive1"
+												 name="active" id="exampleInputActive1"
 												class="form-control select2" style="width: 100%;">
 												<option value="1" selected="selected">ACTIVE</option>
 												<option value="0">NON-ACTIVE</option>
@@ -223,9 +202,8 @@
 
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label for="exampleInputPassword1">Password</label> <input
-												type="hidden" th:field="*{password}" name="password"
-												class="form-control" id="exampleInputPassword1" value="lferda">
+											 <input type="hidden" name="password"
+												class="form-control" id="exampleInputPassword1" value="lferda" />
 										</div>
 									</div>
 
@@ -276,8 +254,10 @@
 											<label for="updateRole1">Role</label> <select name="role"
 												id="updateRole1" class="form-control select2"
 												style="width: 100%;">
-												<option value="ROLE_ADMIN">ADMIN</option>
+												<option value="ROLE_ADMIN" >ADMIN</option>
 												<option value="ROLE_USER" selected="selected">USER</option>
+												<option value="ROLE_SECR" >SECRETAIRE</option>
+												<option value="ROLE_RH" >RH</option>
 											</select>
 										</div>
 									</div>

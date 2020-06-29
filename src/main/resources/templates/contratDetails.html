@@ -50,8 +50,12 @@
 			<section class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
-						<div class="col-sm-6">
+						<div class="col-sm-3">
 							<h1>Contrats</h1>
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-success" data-toggle="modal"
+									data-target="#add-modal">Ajouter</button>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
@@ -67,25 +71,6 @@
 			<!-- Main content -->
 			<section class="content">
 					
-				<div class="row">
-					<!-- left column -->
-					<div class="col-md-12">
-						<!-- jquery validation -->
-						<div class="card">
-							<!-- form start -->
-							<div class="card-body">
-								<button class="btn btn-success" data-toggle="modal"
-									data-target="#add-modal">Ajouter</button>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
-					<!--/.col (left) -->
-					<!-- right column -->
-					<div class="col-md-6"></div>
-					<!--/.col (right) -->
-				</div>
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
@@ -120,10 +105,10 @@
 												<input type="hidden" id="descC" th:value="${cont.desc}">
 											</td>
 											<td><a href="#" type="button" data-toggle="modal"
-												data-target="#update-modal" class="btn btn-info btn-sm"
+												data-target="#update-modal" class="btn btn-outline-info btn-sm"
 												id="editContrat"><i class="fas fa-pencil-alt"> </i>Modifier</a>
 												<a href="#" type="button" data-toggle="modal"
-												data-target="#delete-modal" class="btn btn-danger btn-sm"
+												data-target="#delete-modal" class="btn btn-outline-danger btn-sm"
 												id="deleteContrat"><i class="fas fa-trash"> </i>Supprimer</a> 
 												<input type="hidden" id="idContrat" th:value="${cont.id}"></td>
 										</tr>
@@ -147,7 +132,7 @@
 		<!-- /.content-wrapper -->
 
 		<div class="modal fade" id="add-modal">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#" th:action="@{/contratDetails}" method="post" class="form-signin" role="form">
 						<div class="modal-header">
@@ -209,13 +194,7 @@
 
 								</div>
 								<div class="row">
-
-									<!--<div class="col-sm-12">
-										<div class="form-group">
-											<label for="exampleInputDesc1">Description</label> 
-											<textarea name="desc" class="col-sm-12"></textarea>
-										</div>
-									</div>-->
+								
 									<div class="col-sm-12">
 										<div class="form-group">
 										<label for="exampleInputDesc1">Description</label> 
@@ -223,7 +202,7 @@
 								            <div class="card-body pad">
 								              <div class="mb-3">
 								                <textarea name="desc" class="textareaAdd" placeholder="Place some text here"
-								                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 1px;"></textarea>
+								                          style="width: 100%; height: 400px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 1px;"></textarea>
 								              </div>
 								            </div>
 								          </div>
@@ -249,7 +228,7 @@
 		<!-- /.modal -->
 
 		<div class="modal fade" id="update-modal">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<form autocomplete="off" id="quickForm" action="#"
 						th:action="@{/contratDetails/update}" method="post"
@@ -313,13 +292,6 @@
 
 								</div>
 								<div class="row">
-
-									<!-- <div class="col-sm-12">
-										<div class="form-group">
-											<label for="exampleInputDesc1">Description</label> 
-											<textarea class="col-sm-12" name="desc" id="updateDesc1"></textarea>
-										</div>
-									</div>  -->
 									
 									<div class="col-sm-12">
 										<div class="form-group">
@@ -328,7 +300,7 @@
 								            <div class="card-body pad">
 								              <div class="mb-3">
 								                <textarea id="updateDesc1" name="desc" class="textareaUp" placeholder="Place some text here"
-								                          style="width: 100%; height: 200px; font-size: 14px; line-height: 10px; border: 1px solid #dddddd; padding: 1px;"></textarea>
+								                          style="width: 100%; height: 300px; font-size: 18px; line-height: 10px; border: 1px solid #dddddd; padding: 1px;"></textarea>
 								              </div>
 								            </div>
 								          </div>

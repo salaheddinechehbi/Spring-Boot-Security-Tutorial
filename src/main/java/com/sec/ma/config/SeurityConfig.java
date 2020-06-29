@@ -63,8 +63,8 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
-			.antMatchers("/home","/entrDetails","/clientDetails","/catDetails","/touristeDetails","/contratDetails").hasAnyRole("USER","ADMIN")//the user path should be accessing only to USER user
-			.anyRequest().authenticated()//that main that every request the user must be authentificated
+			.antMatchers("/home","/entrDetails","/clientDetails","/catDetails","/tourDetails","/contratDetails").hasAnyRole("USER","ADMIN")//those paths should be accessing only to USER user
+			.anyRequest().authenticated()//that mains that every request the user must be authentificated
 		.and()
 			.csrf().disable()//we disable srf security
 			.formLogin()
