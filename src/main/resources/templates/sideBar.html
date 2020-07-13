@@ -15,7 +15,7 @@
           <img src="img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" data-toggle="modal" data-target="#profil-modal" class="d-block"><span sec:authentication="name"></span></a>
+          <a href="#" data-toggle="modal" id="infoPers" data-target="#profil-modal" class="d-block"><span sec:authentication="name"></span></a>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
             </ul>
           </li>
           
-          <li sec:authorize="hasAnyRole('ADMIN','USER')" class="nav-item has-treeview">
+          <li sec:authorize="hasAnyRole('ADMIN','USER','SECR')" class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>

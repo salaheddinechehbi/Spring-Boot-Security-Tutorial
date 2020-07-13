@@ -62,11 +62,12 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		http.authorizeRequests()
-			.antMatchers("/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
-			.antMatchers("/home","/entrDetails","/clientDetails","/catDetails","/tourDetails","/contratDetails").hasAnyRole("USER","ADMIN")//those paths should be accessing only to USER user
+			//.antMatchers("/userDetails").hasRole("ADMIN")//the admin path should be accessing only to ADMIN user
+			.antMatchers("/home","/userDetails").hasAnyRole("USER","ADMIN","RH")
+			.antMatchers("/home","/entrDetails","/clientDetails","/catDetails","/tourDetails","/contratDetails").hasAnyRole("USER","ADMIN","SECR")//those paths should be accessing only to USER user
 			.anyRequest().authenticated()//that mains that every request the user must be authentificated
 		.and()
-			.csrf().disable()//we disable srf security
+			.csrf().disable()//we disable csrf security
 			.formLogin()
 			.loginProcessingUrl("/signin")//this is in case we want a custom the action url in form, by default is /login
 			.loginPage("/login").permitAll()//we tell spring security that we have a custom login page

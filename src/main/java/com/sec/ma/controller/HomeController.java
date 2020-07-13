@@ -1,10 +1,13 @@
 package com.sec.ma.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sec.ma.config.MyUserDetails;
 import com.sec.ma.entities.User;
 import com.sec.ma.service.ClientService;
 import com.sec.ma.service.EntrepriseService;
@@ -64,6 +67,14 @@ public class HomeController {
 		return modelAndView;
     }
 	
+	@GetMapping("/findInfo")
+	public User findInfo() {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		MyUserDetails customUser = (MyUserDetails)authentication.getPrincipal();
+		String uname = customUser.getUsername();
+		return userService.findByUserName(uname);
+	}
 	
 	@GetMapping("/access-denied")
 	public ModelAndView accessDenied() {
